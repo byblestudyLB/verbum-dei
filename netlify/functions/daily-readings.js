@@ -229,12 +229,28 @@ export default async () => {
       throw new Error("OLM did not provide both daily readings.");
     }
 
-    const orderedReadings = [...readings].sort(
-      (a, b) => Number(a.pos ?? 0) - Number(b.pos ?? 0)
-    );
+    // OLM's internal position order is not a reliable way to distinguish
+    // the readings: on some dates it places the Gospel first. Identify the
+    // Gospel by its biblical book, then treat the other reading as the Epistle.
+    // The four Gospel books in OLM's Arabic abbreviations are Matthew (مت/متى),
+    // Mark (مر), Luke (لو), and John (يو). Numbered letters (مثل 1 يو) are
+    // deliberately excluded.
+    const isGospelReading = (reading) => {
+      const reference = String(reading?.reference || "")
+        .replace(/[٠-٩]/g, digit => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+        .trim();
+      return /^(?:متى?|مر|لو|يو)\s*\d/.test(reference);
+    };
 
-    const epistleData = orderedReadings[0];
-    const gospelData = orderedReadings[1];
+    const gospelData = readings.find(isGospelReading);
+    const epistleData = readings.find(reading => reading !== gospelData);
+
+    if (!gospelData || !epistleData) {
+      throw new Error(
+        "Could not reliably identify both the Gospel and Epistle in OLM readings: " +
+        readings.map(reading => reading.reference || "unknown reference").join("; ")
+      );
+    }
 
     const [epistle, gospel] = await Promise.all([
       formatReading(epistleData, "epistle"),
