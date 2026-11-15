@@ -57,16 +57,13 @@ jobs:
           const response = await dailyReadings();
           const data = await response.json();
           const complete = response.ok && !data.error && data.date === expected &&
-            data.epistle?.arabic && data.epistle?.english &&
-            data.gospel?.arabic && data.gospel?.english;
+            data.epistle?.arabic && data.gospel?.arabic;
           if (!complete) {
-            console.error("OLM is not ready for " + expected + "; refusing to start the AI model or publish stale readings.", {
+            console.error("OLM Arabic readings are not ready for " + expected + "; refusing to publish stale readings.", {
               returnedDate: data.date || null,
               error: data.error || null,
               epistleArabic: Boolean(data.epistle?.arabic),
-              epistleEnglish: Boolean(data.epistle?.english),
-              gospelArabic: Boolean(data.gospel?.arabic),
-              gospelEnglish: Boolean(data.gospel?.english)
+              gospelArabic: Boolean(data.gospel?.arabic)
             });
             process.exit(1);
           }
