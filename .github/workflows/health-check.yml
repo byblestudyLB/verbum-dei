@@ -1,0 +1,82 @@
+name: Verbum Dei health check
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions may start scheduled jobs a little late during busy periods.
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  check-live-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the published website and daily Scripture content
+        run: |
+          node --input-type=module <<'NODE'
+          const base = "https://byblestudyLB.github.io/verbum-dei";
+          const today = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "Asia/Beirut",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+          }).format(new Date());
+
+          async function get(path) {
+            const response = await fetch(base + path + "?health-check=" + Date.now(), {
+              cache: "no-store",
+              headers: { "User-Agent": "Verbum-Dei-Health-Check" }
+            });
+            if (!response.ok) {
+              throw new Error(path + " returned HTTP " + response.status);
+            }
+            return response;
+          }
+
+          const [home, app, readingsResponse, explanationResponse] = await Promise.all([
+            get("/"),
+            get("/app.js"),
+            get("/data/daily-readings.json"),
+            get("/data/gospel-explanation.json")
+          ]);
+
+          const html = await home.text();
+          const js = await app.text();
+          if (!html.includes("Verbum Dei")) throw new Error("The homepage does not contain the expected site title.");
+          if (!js.includes("showDailyReadings") || !js.includes("showGospelFeature")) {
+            throw new Error("The daily readings or Gospel interface code is missing.");
+          }
+
+          const readings = await readingsResponse.json();
+          if (readings.date !== today) {
+            throw new Error("Readings date is " + (readings.date || "missing") + "; expected Beirut date " + today + ".");
+          }
+          for (const [name, item] of [["Epistle", readings.epistle], ["Gospel", readings.gospel]]) {
+            if (!item || !item.reference || !item.english || !item.arabic) {
+              throw new Error(name + " is missing its reference or English/Arabic text.");
+            }
+          }
+          if (readings.epistle.type !== "epistle" || readings.gospel.type !== "gospel") {
+            throw new Error("The Epistle/Gospel labels are incorrect.");
+          }
+
+          const explanation = await explanationResponse.json();
+          if (explanation.date !== today || explanation.gospelReference !== readings.gospel.reference) {
+            throw new Error("The Gospel explanation does not match today's date and Gospel reference.");
+          }
+          const sections = ["whatHappened", "jesusTeaches", "liveToday", "prayer"];
+          for (const language of ["english", "arabic"]) {
+            for (const section of sections) {
+              const value = explanation[language]?.[section];
+              if (typeof value !== "string" || !value.trim()) {
+                throw new Error("The " + language + " Gospel explanation is missing " + section + ".");
+              }
+            }
+          }
+
+          console.log("PASS: homepage and app.js are reachable.");
+          console.log("PASS: " + today + " Epistle (" + readings.epistle.reference + ") and Gospel (" + readings.gospel.reference + ") both have English and Arabic text.");
+          console.log("PASS: today's Gospel explanation matches and includes all four sections in English and Arabic.");
+          NODE
