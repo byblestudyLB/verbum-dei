@@ -69,7 +69,7 @@ async function getEnglishPassage(reference) {
           const text = Array.isArray(verses)
             ? verses.map(verse => verse.text || "").filter(Boolean).join(" ").trim()
             : "";
-          if (!payload.errors?.length && text) {
+          if (text && !payload.errors?.length) {
             return { text, version: version.name };
           }
           console.warn(`${version.name} returned no usable verses for ${reference} (attempt ${attempt}/3).`);
