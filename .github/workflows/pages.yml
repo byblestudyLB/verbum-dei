@@ -57,17 +57,24 @@ jobs:
           const response = await dailyReadings();
           const data = await response.json();
           const complete = response.ok && !data.error && data.date === expected &&
-            data.epistle?.arabic && data.gospel?.arabic;
+            data.epistle?.arabic && data.epistle?.english &&
+            data.gospel?.arabic && data.gospel?.english;
           if (!complete) {
-            console.error("OLM Arabic readings are not ready for " + expected + "; refusing to publish stale readings.", {
+            console.error("Complete bilingual OLM readings are not ready for " + expected + "; refusing to publish incomplete or stale readings.", {
               returnedDate: data.date || null,
               error: data.error || null,
+              epistleReference: data.epistle?.reference || null,
+              epistleEnglishReference: data.epistle?.englishReference || null,
               epistleArabic: Boolean(data.epistle?.arabic),
-              gospelArabic: Boolean(data.gospel?.arabic)
+              epistleEnglish: Boolean(data.epistle?.english),
+              gospelReference: data.gospel?.reference || null,
+              gospelArabic: Boolean(data.gospel?.arabic),
+              gospelEnglish: Boolean(data.gospel?.english)
             });
             process.exit(1);
           }
-          console.log("Verified complete OLM readings for " + expected + ".");
+          console.log("Verified complete bilingual OLM readings for " + expected +
+            ". Epistle: " + data.epistle.reference + "; Gospel: " + data.gospel.reference + ".");
           NODE
 
       - name: Start the free local Gospel explanation model
