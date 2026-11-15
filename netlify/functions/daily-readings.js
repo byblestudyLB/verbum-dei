@@ -139,6 +139,10 @@ async function formatReading(reading, type) {
     .replace(/مت\s*/g, "Matthew ")
     .replace(/مر\s*/g, "Mark ")
     .replace(/لو\s*/g, "Luke ")
+    // Match longer OLM abbreviations before shorter prefixes:
+    // "روم" (Romans) must be handled before "رو", otherwise the final
+    // Arabic letter is left behind and the API receives an invalid book name.
+    .replace(/روم\s*/g, "Romans ")
     .replace(/رو\s*/g, "Romans ")
     .replace(/أع\s*/g, "Acts ")
     .replace(/غل\s*/g, "Galatians ")
