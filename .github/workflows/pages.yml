@@ -5,8 +5,8 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # Retry the daily OLM refresh several times; all times are UTC.
-    - cron: "15 1,4,7 * * *"
+    # Recheck OLM throughout the day (UTC) so a late calendar update is picked up.
+    - cron: "15 1,4,7,10,13,16,19,22 * * *"
 
 permissions:
   contents: write
@@ -65,7 +65,17 @@ jobs:
         run: |
           mkdir -p _site/data
           cp index.html app.js botData.js prayers.js saints.js style.css _site/
-          node scripts/generate-data.mjs
+          for attempt in 1 2 3 4; do
+            if node scripts/generate-data.mjs; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 4 ]; then
+              echo "OLM daily data is not ready yet (attempt $attempt/4). Retrying in 90 seconds..."
+              sleep 90
+            fi
+          done
+          echo "Could not verify complete OLM readings for today after 4 attempts."
+          exit 1
 
       - name: Save today's explanation so later visitors reuse it
         run: |
