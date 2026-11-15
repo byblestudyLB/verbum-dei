@@ -47,6 +47,32 @@ jobs:
             echo "needed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Verify today's OLM readings before starting the explanation model
+        run: |
+          node --input-type=module <<'NODE'
+          import dailyReadings from "./netlify/functions/daily-readings.js";
+          const expected = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "Asia/Beirut", year: "numeric", month: "2-digit", day: "2-digit"
+          }).format(new Date());
+          const response = await dailyReadings();
+          const data = await response.json();
+          const complete = response.ok && !data.error && data.date === expected &&
+            data.epistle?.arabic && data.epistle?.english &&
+            data.gospel?.arabic && data.gospel?.english;
+          if (!complete) {
+            console.error("OLM is not ready for " + expected + "; refusing to start the AI model or publish stale readings.", {
+              returnedDate: data.date || null,
+              error: data.error || null,
+              epistleArabic: Boolean(data.epistle?.arabic),
+              epistleEnglish: Boolean(data.epistle?.english),
+              gospelArabic: Boolean(data.gospel?.arabic),
+              gospelEnglish: Boolean(data.gospel?.english)
+            });
+            process.exit(1);
+          }
+          console.log("Verified complete OLM readings for " + expected + ".");
+          NODE
+
       - name: Start the free local Gospel explanation model
         if: steps.gospel-cache.outputs.needed == 'true'
         run: |
