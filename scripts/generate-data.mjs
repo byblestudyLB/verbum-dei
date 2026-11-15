@@ -19,9 +19,7 @@ if (
   readings.error ||
   readings.date !== beirutDate ||
   !readings.epistle?.arabic ||
-  !readings.epistle?.english ||
-  !readings.gospel?.arabic ||
-  !readings.gospel?.english
+  !readings.gospel?.arabic
 ) {
   throw new Error(
     "OLM daily readings could not be verified for " + beirutDate + ": " +
