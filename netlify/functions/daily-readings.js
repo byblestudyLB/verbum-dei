@@ -42,36 +42,49 @@ function htmlToText(html) {
 }
 
 async function getEnglishPassage(reference) {
-  // Prefer the World English Bible. If it has no text for a passage,
-  // fall back to the public-domain King James Version.
+  // Prefer the World English Bible, then use the public-domain KJV.
+  // Retry transient API failures: the daily build must not publish a reading
+  // with Arabic only when the English service briefly times out or rate-limits.
   const versions = [
     { module: "web", name: "World English Bible" },
     { module: "kjv", name: "King James Version" }
   ];
 
   for (const version of versions) {
-    try {
-      const url = new URL(BIBLE_API);
-      url.searchParams.set("bible", version.module);
-      url.searchParams.set("reference", reference);
-      url.searchParams.set("data_format", "minimal");
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const url = new URL(BIBLE_API);
+        url.searchParams.set("bible", version.module);
+        url.searchParams.set("reference", reference);
+        url.searchParams.set("data_format", "minimal");
 
-      const response = await fetch(url);
-      if (!response.ok) continue;
+        const response = await fetch(url, {
+          headers: { "Accept": "application/json" }
+        });
+        if (!response.ok) {
+          console.warn(`${version.name} returned HTTP ${response.status} for ${reference} (attempt ${attempt}/3).`);
+        } else {
+          const payload = await response.json();
+          const verses = payload.results?.[version.module];
+          const text = Array.isArray(verses)
+            ? verses.map(verse => verse.text || "").filter(Boolean).join(" ").trim()
+            : "";
+          if (!payload.errors?.length && text) {
+            return { text, version: version.name };
+          }
+          console.warn(`${version.name} returned no usable verses for ${reference} (attempt ${attempt}/3).`);
+        }
+      } catch (error) {
+        console.error(`Could not load ${version.name} for ${reference} (attempt ${attempt}/3):`, error);
+      }
 
-      const payload = await response.json();
-      if (payload.errors?.length) continue;
-
-      const verses = payload.results?.[version.module];
-      if (!Array.isArray(verses) || !verses.length) continue;
-
-      const text = verses.map(verse => verse.text || "").filter(Boolean).join(" ").trim();
-      if (text) return { text, version: version.name };
-    } catch (error) {
-      console.error(`Could not load ${version.name} for ${reference}:`, error);
+      if (attempt < 3) {
+        await new Promise(resolve => setTimeout(resolve, 500 * attempt));
+      }
     }
   }
 
+  console.error(`No English Bible text could be retrieved for ${reference} from WEB or KJV.`);
   return { text: "", version: "" };
 }
 
