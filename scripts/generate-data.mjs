@@ -19,16 +19,18 @@ if (
   readings.error ||
   readings.date !== beirutDate ||
   !readings.epistle?.arabic ||
-  !readings.gospel?.arabic
+  !readings.epistle?.english ||
+  !readings.gospel?.arabic ||
+  !readings.gospel?.english
 ) {
   throw new Error(
     "OLM daily readings could not be verified for " + beirutDate + ": " +
-    (readings.error || `returned date ${readings.date || "unknown"} or incomplete reading texts.`)
+    (readings.error || `returned date ${readings.date || "unknown"} or incomplete English/Arabic reading texts. Epistle English: ${Boolean(readings.epistle?.english)}; Gospel English: ${Boolean(readings.gospel?.english)}.`)
   );
 }
-console.log(`Verified OLM date ${readings.date} from ${readings.source}; Gospel: ${readings.gospel.reference}.`);
-console.log("Complete OLM Gospel (English): " + readings.gospel.english);
-console.log("Complete OLM Gospel (Arabic): " + readings.gospel.arabic);
+console.log(`Verified OLM date ${readings.date} from ${readings.source}; Epistle: ${readings.epistle.reference}; Gospel: ${readings.gospel.reference}.`);
+console.log("Epistle English version: " + (readings.epistle.englishVersion || "missing") + "; English characters: " + readings.epistle.english.length);
+console.log("Gospel English version: " + (readings.gospel.englishVersion || "missing") + "; English characters: " + readings.gospel.english.length);
 await fs.writeFile(path.join(outputDir, "daily-readings.json"), JSON.stringify(readings, null, 2) + "\n", "utf8");
 
 const explanationPath = path.resolve("data/gospel-explanation.json");
