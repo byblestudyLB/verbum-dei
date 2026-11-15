@@ -147,6 +147,7 @@ async function formatReading(reading, type) {
     .replace(/[٠-٩]/g, digit =>
       "٠١٢٣٤٥٦٧٨٩".indexOf(digit)
     )
+    .replace(/تك\s*/g, "Genesis ")
     .replace(/عب\s*/g, "Hebrews ")
     .replace(/يو\s*/g, "John ")
     .replace(/مت\s*/g, "Matthew ")
