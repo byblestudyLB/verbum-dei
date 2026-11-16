@@ -5,12 +5,17 @@ on:
   schedule:
     # GitHub Actions may start scheduled jobs a little late during busy periods.
     - cron: "*/30 * * * *"
+  workflow_run:
+    # Verify the live Pages files after every successful deployment.
+    workflows: ["Deploy Verbum Dei to GitHub Pages"]
+    types: [completed]
 
 permissions:
   contents: read
 
 jobs:
   check-live-site:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Check the published website and daily Scripture content
