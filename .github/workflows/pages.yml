@@ -37,19 +37,11 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/olm-deps" cheerio@1.0.0
           ln -s "$RUNNER_TEMP/olm-deps/node_modules" "$GITHUB_WORKSPACE/node_modules"
 
-      - name: Check whether today's Gospel explanation is already saved
-        id: gospel-cache
-        run: |
-          TODAY="$(TZ=Asia/Beirut date +%F)"
-          if [ -f data/gospel-explanation.json ] && grep -q "\"date\": \"$TODAY\"" data/gospel-explanation.json; then
-            echo "needed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "needed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Verify today's OLM readings before starting the explanation model
+      - name: Verify today's OLM readings and explanation before starting the model
+        id: verify-olm
         run: |
           node --input-type=module <<'NODE'
+          import fs from "node:fs/promises";
           import dailyReadings from "./netlify/functions/daily-readings.js";
           const expected = new Intl.DateTimeFormat("en-CA", {
             timeZone: "Asia/Beirut", year: "numeric", month: "2-digit", day: "2-digit"
@@ -75,10 +67,25 @@ jobs:
           }
           console.log("Verified complete bilingual OLM readings for " + expected +
             ". Epistle: " + data.epistle.reference + "; Gospel: " + data.gospel.reference + ".");
+
+          let savedExplanation = null;
+          try {
+            savedExplanation = JSON.parse(await fs.readFile("data/gospel-explanation.json", "utf8"));
+          } catch {}
+          const explanationMatches =
+            savedExplanation?.date === expected &&
+            savedExplanation?.gospelReference === data.gospel.reference;
+          await fs.appendFile(
+            process.env.GITHUB_OUTPUT,
+            "needed=" + (explanationMatches ? "false" : "true") + "\n"
+          );
+          console.log(explanationMatches
+            ? "A saved explanation matches today's OLM date and Gospel reference; skipping the model."
+            : "No saved explanation matches today's OLM date and Gospel reference; generating a new one.");
           NODE
 
       - name: Start the free local Gospel explanation model
-        if: steps.gospel-cache.outputs.needed == 'true'
+        if: steps.verify-olm.outputs.needed == 'true'
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
           (ollama serve > /tmp/ollama.log 2>&1 &)
