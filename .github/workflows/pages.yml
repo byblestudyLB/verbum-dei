@@ -126,11 +126,17 @@ jobs:
             fi
           fi
 
+      # Give every run its own artifact name. GitHub retains old artifacts for
+      # a day; the default shared name caused deploy-pages to find two artifacts
+      # and fail even though the current site had built successfully.
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: pages-${{ github.run_id }}-${{ github.run_attempt }}
