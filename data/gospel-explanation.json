@@ -1,18 +1,18 @@
 {
-  "date": "2026-11-18",
-  "gospelReference": "يو 8 / 41 - 45",
-  "model": "Manually reviewed bilingual explanation",
-  "generatedAt": "2026-11-18T05:38:29+02:00",
+  "date": "2026-11-19",
+  "gospelReference": "يو 8 / 46 - 50",
+  "model": "Qwen3 4B · locally run",
+  "generatedAt": "2026-11-18T23:51:30.990Z",
   "english": {
-    "whatHappened": "Jesus tells his listeners that their actions show whom they follow. They say that God is their Father, but Jesus explains that if they truly loved God, they would love him, because God sent him. He challenges their refusal to listen and warns them that lies and evil come from the devil. Although Jesus tells them the truth, they refuse to believe him.",
-    "jesusTeaches": "Jesus teaches that love for God is shown by welcoming him and listening to his words. He invites us to reject lies and evil and to live according to the truth, even when it is difficult to accept.",
-    "liveToday": "Let us be truthful in our words and actions today. When Jesus' teaching challenges us, we can listen with an open heart and ask him to help us change.",
-    "prayer": "Lord Jesus, help us listen to your words and welcome your truth. Teach us to love you, reject falsehood and live honestly. Amen."
+    "whatHappened": "Jesus asks the Jews if anyone can accuse him of sin. He says that if he speaks the truth, they should believe him. He explains that those who are from God hear God’s words, but the Jews don’t hear because they are not from God. The Jews then challenge him by saying he is a Samaritan and has a demon. Jesus responds that he doesn’t have a demon but honors his Father, and he doesn’t seek his own glory—someone else will judge him.",
+    "jesusTeaches": "Jesus shows that true belief comes from listening to God’s truth, not from what people say or think. He points out that those who are connected to God understand and accept God’s message, while those who are not from God may reject it. Jesus also teaches that he is not seeking personal glory but is willing to be judged by others.",
+    "liveToday": "When you hear someone speaking truthfully, try to listen without judgment. Ask yourself if you are open to understanding God’s message in your life.",
+    "prayer": "Lord Jesus, help me to listen to your truth with an open heart. May I honor you as my Father’s child and not seek my own glory. Guide me to be judged by your love, not by my own pride."
   },
   "arabic": {
-    "whatHappened": "يقول يسوع للذين يخاطبهم إنّ أعمالهم تكشف مَن يتبعون. فيقولون إنّ الله هو أبوهم، لكنّ يسوع يوضح لهم أنّهم لو أحبّوا الله حقًّا لأحبّوه أيضًا، لأنّ الله أرسله. وينبّههم إلى رفضهم الإصغاء إلى كلامه، ويحذّرهم من الكذب والشرّ اللذين يأتيان من إبليس. ومع أنّ يسوع يقول لهم الحقّ، فإنّهم يرفضون تصديقه.",
-    "jesusTeaches": "يعلّمنا يسوع أنّ محبّة الله تظهر في قبولنا له وإصغائنا إلى كلامه. وهو يدعونا إلى رفض الكذب والشرّ والعيش بحسب الحقّ، حتّى عندما يصعب علينا قبوله.",
-    "liveToday": "لنكن صادقين اليوم في كلامنا وأعمالنا. وعندما يدعونا تعليم يسوع إلى تغيير تصرّفاتنا، لنصغِ إليه بقلب منفتح ونطلب منه أن يساعدنا على التغيير.",
-    "prayer": "يا ربّ يسوع، ساعدنا على الإصغاء إلى كلامك وقبول حقّك. علّمنا أن نحبّك ونرفض الكذب ونعيش بصدق. آمين."
+    "whatHappened": "يُسأل يسوع اليهود هل يُمكن لأي شخص اتهامه بالضلال. يقول إنهم إذا سمعوا الحقيقة يجب أن يؤمنوا به. يوضح أن من يُنَبَّأ من الله يسمع كلام الله، لكن اليهود لا يسمعون لأنهم ليسوا من الله. ثم يُحَدِّد اليهود أنه سامري وله شر. يُرد يسوع أنه لا يُعَدُّ شرًا بل يُحِبُّ والده، ولا يُريد لذاته عُلُوَّةً بل سَيُقَدَّرُهُ شخص آخر.",
+    "jesusTeaches": "يسوع يُظهر أن الإيمان الحقيقي يَأتي من سَمَاع كلام الله، وليس من ما يقوله الناس أو يفكرون فيه. يُشير إلى أن من يُنَبَّأ من الله يُعْرِف ويتقبل كلام الله، بينما من ليسوا من الله قد يرفضونه. يُعلِّم أيضًا أن يسوع لا يُريد لذاته عُلُوَّةً بل يُرِيد أن يُقَدَّرَ من قبل الآخرين.",
+    "liveToday": "عندما تسمع شخصًا يُحدث حقيقة، حاول أن تَسْمَع دون انتقاد. اسأل نفسك هل أنت مفتوح لفهم رسالة الله في حياتك.",
+    "prayer": "اللهم يسوع، اجعلني أسمع حديثك بالقلب مفتوح. اجعلني أُحِبُّك كابن والدي وليستَ عُلُوَّةً لذاتي. ارشدني أن أُقَدَّرُ من حبك، وليس من فخري."
   }
 }
