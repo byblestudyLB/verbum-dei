@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111c25"><meta name="description" content="Spiritual hymns for prayer: Saint Charbel, Saint Rafqa, Saint Rita, Mary, Christmas, Jesus and Easter.">
+<meta name="theme-color" content="#111c25">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icons/app-icon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Verbum Dei">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="Spiritual hymns for prayer: Saint Charbel, Saint Rafqa, Saint Rita, Mary, Christmas, Jesus and Easter.">
 <title>Spiritual Hymns · تراتيل روحية — Verbum Dei</title>
 <style>
 :root{color-scheme:dark;--bg:#111c25;--panel:#1b2d38;--panel2:#213540;--ink:#f3ece1;--soft:#d5d3cd;--muted:#b1bbb7;--gold:#dfa97d;--line:#45545e}
@@ -129,4 +136,4 @@ $("#clear").addEventListener("click",()=>{$("#search").value="";selectedCat="all
 $("#search").addEventListener("input",render);
 document.addEventListener("click",e=>{const filter=e.target.closest("[data-cat]");if(filter){selectedCat=filter.dataset.cat;render();return}const p=e.target.closest("[data-play]");if(p){play(p.dataset.play);return}const f=e.target.closest("[data-fav]");if(f)fav(f.dataset.fav)});
 render();
-</script></body></html>
+</script><script src="./pwa.js?v=20261120-1" defer></script></body></html>

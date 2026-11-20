@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111c25">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icons/app-icon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Verbum Dei">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
   <meta name="description" content="Verbum Dei — Scripture, Maronite heritage, saints and prayer in Arabic and English.">
   <title>Verbum Dei — A living faith companion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +61,10 @@
     <section class="welcome-row">
       <div><p class="section-kicker" data-i18n="welcomeKicker">YOUR DAILY PAUSE</p><h2 data-i18n="welcomeTitle">A moment that belongs to you.</h2></div>
       <div class="date-chip" id="todayDate">Today</div>
+    </section>
+    <section class="app-install-strip" aria-label="Install Verbum Dei for free">
+      <div><strong>Verbum Dei on your phone · Verbum Dei على هاتفك</strong><small>Free to install, with your own app icon · تطبيق مجاني مع أيقونة على الشاشة الرئيسية</small></div>
+      <button type="button" id="installAppHomeButton" class="app-install-action">Install free · نزّل مجانًا</button>
     </section>
     <section class="feature-grid">
       <article class="feature-card daily-card"><div class="card-topline"><span class="card-index">01 / TODAY · اليوم</span><span class="card-symbol">✳</span></div><h3 data-i18n="dailyTitle">The daily readings</h3><p data-i18n="dailyDescription">The Gospel, Epistle and liturgical color from the Maronite calendar.</p><button class="text-button" data-action="daily" data-i18n="openReadings">Explore today's readings ↗</button></article>
@@ -133,9 +144,21 @@
       <button class="side-menu-link" data-view="calendar"><span class="side-menu-icon">▦</span><span><strong>Church Calendar</strong><small>التقويم الكنسي</small></span></button>
       <button class="side-menu-link" data-view="heritage"><span class="side-menu-icon">⌁</span><span><strong>Lebanese Heritage</strong><small>التراث اللبناني</small></span></button>
     </nav>
-    <div class="side-menu-footer"><button class="side-menu-settings" id="sideMenuSettings" type="button" onclick="document.getElementById('sideMenu').close(); document.getElementById('settingsButton').click()"><span>⚙</span><span><strong>Settings</strong><small>الإعدادات</small></span></button><p>Faith, every day · الإيمان كل يوم</p></div>
+    <div class="side-menu-footer"><button type="button" class="side-menu-settings" id="installAppButton"><span>⬇</span><span><strong>Install Verbum Dei</strong><small>نزّل التطبيق مجانًا</small></span></button><button class="side-menu-settings" id="sideMenuSettings" type="button" onclick="document.getElementById('sideMenu').close(); document.getElementById('settingsButton').click()"><span>⚙</span><span><strong>Settings</strong><small>الإعدادات</small></span></button><p>Faith, every day · الإيمان كل يوم</p></div>
   </dialog>
 
+<dialog id="installDialog" class="install-app-dialog" aria-labelledby="installDialogTitle">
+  <div class="install-dialog-inner">
+    <button id="closeInstallDialog" type="button" class="install-dialog-close" aria-label="Close install instructions">×</button>
+    <p class="section-kicker">FREE APP · تطبيق مجاني</p>
+    <h2 id="installDialogTitle">Verbum Dei on your phone<br><span lang="ar" dir="rtl">Verbum Dei على هاتفك</span></h2>
+    <p>Install for free without the App Store or Google Play. Your prayers, readings and hymns remain on the same Verbum Dei website.</p>
+    <div class="install-guide"><strong>iPhone · آيفون</strong><p>Open the site in <b>Safari</b>, tap <b>Share</b>, choose <b>Add to Home Screen</b>, turn on <b>Open as Web App</b> if shown, then tap <b>Add</b>.</p><p lang="ar" dir="rtl">افتح الموقع في سفاري، اضغط «مشاركة»، ثم «إضافة إلى الشاشة الرئيسية»، وفعّل «فتح كتطبيق» إذا ظهر الخيار، واضغط «إضافة».</p></div>
+    <div class="install-guide"><strong>Android · أندرويد</strong><p>Open in <b>Chrome</b>, tap the <b>⋮</b> menu, and choose <b>Install app</b> or <b>Add to Home screen</b>.</p><p lang="ar" dir="rtl">افتح الموقع في كروم، واضغط قائمة ⋮ ثم «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».</p></div>
+    <p class="install-note">The newest Gospel, Epistle and other daily updates still need internet access. No subscription, notifications or account required.</p>
+  </div>
+</dialog>
 <dialog id="settingsDialog" class="settings-dialog"><form method="dialog" class="settings-form"><div class="dialog-heading"><div><p class="section-kicker" data-i18n="settingsKicker">MAKE IT YOURS</p><h2 data-i18n="settingsTitle">Settings</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div><label for="displayLanguage" data-i18n="languageLabel">Display language</label><select id="displayLanguage"><option value="both">English + العربية</option><option value="en">English</option><option value="ar">العربية</option></select><label for="fontSize" data-i18n="fontLabel">Website text size</label><select id="fontSize"><option value="small">Small · صغير</option><option value="normal">Normal · عادي</option><option value="large">Large · كبير</option><option value="xlarge">Extra large · كبير جدًا</option></select><label for="colorTheme" data-i18n="themeLabel">Color mood</label><select id="colorTheme"><option value="midnight">Midnight & copper · منتصف الليل والنحاس</option><option value="daylight">Daylight · ضوء النهار</option></select><button class="primary-button" id="saveSettings" value="save" data-i18n="saveSettings">Save settings</button></form></dialog>
 <script src="./botData.js" defer></script><script src="./prayers.js?v=20261120-situations1" defer></script><script src="./app.js?v=20261120-situations1" defer></script><script src="./saints.js?v=20261120-saintbio1" defer></script>
+<script src="./pwa.js?v=20261120-1" defer></script>
 </body></html>

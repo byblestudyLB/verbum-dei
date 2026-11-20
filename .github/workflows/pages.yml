@@ -32,6 +32,29 @@ jobs:
         with:
           node-version: 22
 
+      - name: Validate installable PWA assets
+        run: |
+          node --check sw.js
+          node --check pwa.js
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const data=JSON.parse(fs.readFileSync("manifest.webmanifest","utf8"));
+          if(data.display!=="standalone"||data.scope!=="./"||data.start_url!=="./?source=installed-app")throw new Error("PWA start path or display incorrect");
+          if(!data.icons.some(icon=>icon.sizes==="192x192")||!data.icons.some(icon=>icon.sizes==="512x512"))throw new Error("Missing install icons");
+          for (const size of [180,192,512]){
+            const bytes=fs.readFileSync("icons/icon-"+size+".png");
+            if(bytes.subarray(0,8).toString("hex")!=="89504e470d0a1a0a"||bytes.readUInt32BE(16)!==size||bytes.readUInt32BE(20)!==size)throw new Error("Invalid icon "+size);
+          }
+          for(const page of ["index.html","hymns.html"]){
+            const source=fs.readFileSync(page,"utf8");
+            if(!source.includes('rel="manifest" href="./manifest.webmanifest"')||!source.includes('src="./pwa.js?v=20261120-1"'))throw new Error("Install support missing from "+page);
+          }
+          const home=fs.readFileSync("index.html","utf8");
+          if(!home.includes('id="installAppHomeButton"')||!home.includes('id="installAppButton"')||!home.includes('id="installDialog"'))throw new Error("Missing install UI");
+          if(!fs.readFileSync("sw.js","utf8").includes('event.request.mode!=="navigate"'))throw new Error("Service worker must not cache live readings");
+          console.log("Validated installable PWA, 3 PNG icons, safe offline fallback and install instructions.");
+          NODE
+
       - name: Validate original and new bilingual prayers
         run: |
           node --check prayers.js
@@ -199,7 +222,9 @@ jobs:
       - name: Assemble static website
         run: |
           mkdir -p _site/data
-          cp index.html app.js botData.js prayers.js saints.js style.css hymns.html _site/
+          cp index.html app.js botData.js prayers.js saints.js style.css hymns.html manifest.webmanifest sw.js pwa.js offline.html _site/
+          mkdir -p _site/icons
+          cp icons/app-icon.svg icons/icon-180.png icons/icon-192.png icons/icon-512.png _site/icons/
           for attempt in 1 2 3 4; do
             if node scripts/generate-data.mjs; then
               exit 0
@@ -261,6 +286,14 @@ jobs:
                grep -q 'window.verbumSaintBiographyByName(saint.key)' /tmp/app-live.js &&
                grep -q 'saint-day-fullbio' /tmp/app-live.js &&
                grep -q 'function applyPrayerSearch' /tmp/app-live.js &&
+               grep -q 'rel="manifest" href="./manifest.webmanifest"' /tmp/hymns-home.html &&
+               grep -q 'id="installAppHomeButton"' /tmp/hymns-home.html &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/manifest.webmanifest?verify=${GITHUB_RUN_ID}" -o /tmp/pwa-manifest.json &&
+               grep -q '"display": "standalone"' /tmp/pwa-manifest.json &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/sw.js?verify=${GITHUB_RUN_ID}" -o /tmp/pwa-sw.js &&
+               grep -q 'Never cache live Maronite/OLM readings' /tmp/pwa-sw.js &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/icons/icon-192.png?verify=${GITHUB_RUN_ID}" -o /tmp/pwa-icon.png &&
+               node -e 'const b=require("fs").readFileSync("/tmp/pwa-icon.png");if(b.readUInt32BE(16)!==192)process.exit(1)' &&
                curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/saints.js?verify=${GITHUB_RUN_ID}" -o /tmp/saints-live.js &&
                grep -q 'window.verbumSaintBiographyByName' /tmp/saints-live.js; then
               echo "Verified live hymn page, homepage navigation, and Saint of the Day full biography feature."

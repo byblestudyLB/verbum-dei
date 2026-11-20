@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Verbum Dei app icon">
+  <rect width="512" height="512" rx="84" fill="#111c25"/>
+  <circle cx="256" cy="256" r="217" fill="none" stroke="#d9ac82" stroke-width="11"/>
+  <path d="M143 154 L259 358 L373 154" fill="none" stroke="#d9ac82" stroke-linecap="round" stroke-linejoin="round" stroke-width="36"/>
+  <circle cx="406" cy="357" r="18" fill="#d9ac82"/>
+</svg>
