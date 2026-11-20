@@ -44,7 +44,8 @@ jobs:
           const raw = script.match(/const hymns=(\[[\s\S]*?\]);\s*const categories=/)?.[1];
           if (!raw) throw new Error("Hymns metadata missing");
           const hymns = JSON.parse(raw);
-          if (hymns.length < 50) throw new Error("Expected 50+ curated hymns");
+          if (hymns.length < 67) throw new Error("Expected at least 67 curated hymns");
+          if (hymns.filter(h => h.cat === "jesus").length < 11) throw new Error("Jesus hymns collection must contain at least 11 tracks");
           const expectedCategories = ["charbel","rafqa","rita","mary","christmas","jesus","easter"];
           for (const category of expectedCategories) {
             if (!hymns.some(h => h.cat === category)) throw new Error("Category missing: " + category);
@@ -178,6 +179,8 @@ jobs:
                grep -q 'const categories=' /tmp/hymns-live.html &&
                grep -q 'id="dailyAgain"' /tmp/hymns-live.html &&
                grep -q 'verbum-hymn-of-day-v2' /tmp/hymns-live.html &&
+               grep -q '"video":"oUHcLtucLaU"' /tmp/hymns-live.html &&
+               grep -q '"video":"5lBJmnM0fXg"' /tmp/hymns-live.html &&
                curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/hymns-home.html &&
                grep -q 'Your Hymn Today' /tmp/hymns-home.html &&
                grep -q 'class="hymn-invitation"' /tmp/hymns-home.html &&
