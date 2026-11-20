@@ -32,6 +32,36 @@ jobs:
         with:
           node-version: 22
 
+      - name: Validate original and new bilingual prayers
+        run: |
+          node --check prayers.js
+          node --check app.js
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import vm from "node:vm";
+          const sandbox = {window: {}};
+          vm.runInNewContext(fs.readFileSync("prayers.js", "utf8"), sandbox);
+          const data = sandbox.window.PRAYER_DATA;
+          if (!Array.isArray(data?.items) || data.items.length !== 54) throw new Error("Expected 54 bilingual prayers (15 existing + 39 new)");
+          const established = ["sign-cross","our-father","hail-mary","glory-be","morning","evening","study","sacred-heart","divine-mercy","mary","charbel","rafqa","anthony","family","lebanon"];
+          const categories = new Set(data.categories.map(c=>c.id));
+          if (!categories.has("situations") || data.items.filter(p=>p.category==="situations").length !== 24) throw new Error("Situational prayer category incomplete");
+          const norm = s=>String(s||"").normalize("NFKD").replace(/[\\u064B-\\u065F\\u0670]/g,"").replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").toLowerCase().replace(/\\s+/g," ").trim();
+          const ids = new Set(), englishTitles = new Set(), arabicTitles = new Set(), prayersEn = new Set(), prayersAr = new Set();
+          for (const p of data.items) {
+            if (!categories.has(p.category) || !p.id || !p.enTitle || !p.arTitle || !p.en || !p.ar || !p.noteEn || !p.noteAr) throw new Error("Incomplete bilingual prayer: "+p.id);
+            for (const [set,key] of [[ids,p.id],[englishTitles,norm(p.enTitle)],[arabicTitles,norm(p.arTitle)],[prayersEn,norm(p.en)],[prayersAr,norm(p.ar)]]) {
+              if (set.has(key)) throw new Error("Duplicate prayer id, title or text: "+p.id);
+              set.add(key);
+            }
+          }
+          if (established.some(id=>!ids.has(id))) throw new Error("An existing prayer was lost");
+          const app = fs.readFileSync("app.js","utf8"), page = fs.readFileSync("index.html","utf8");
+          if (!app.includes("function applyPrayerSearch") || !app.includes("prayerSearchTerm") || !app.includes("id=\"prayerSearch\"")) throw new Error("Prayer search is missing");
+          if (!page.includes("prayers.js?v=20261120-situations1")) throw new Error("New prayers are not cache-busted");
+          console.log("Verified 15 preserved, 39 new, 24 situational and no duplicate prayer titles, IDs or texts.");
+          NODE
+
       - name: Validate Saint of the Day biographies
         run: |
           node --check app.js
@@ -222,10 +252,15 @@ jobs:
                grep -q 'Your Hymn Today' /tmp/hymns-home.html &&
                grep -q 'class="hymn-invitation"' /tmp/hymns-home.html &&
                grep -q 'href="./hymns.html#today"' /tmp/hymns-home.html &&
+               grep -q '20261120-situations1' /tmp/hymns-home.html &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/prayers.js?verify=${GITHUB_RUN_ID}" -o /tmp/prayers-live.js &&
+               grep -q 'id: "before-exam"' /tmp/prayers-live.js &&
+               grep -q 'id: "situations"' /tmp/prayers-live.js &&
                grep -q '20261120-saintbio1' /tmp/hymns-home.html &&
                curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/app.js?verify=${GITHUB_RUN_ID}" -o /tmp/app-live.js &&
                grep -q 'window.verbumSaintBiographyByName(saint.key)' /tmp/app-live.js &&
                grep -q 'saint-day-fullbio' /tmp/app-live.js &&
+               grep -q 'function applyPrayerSearch' /tmp/app-live.js &&
                curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/saints.js?verify=${GITHUB_RUN_ID}" -o /tmp/saints-live.js &&
                grep -q 'window.verbumSaintBiographyByName' /tmp/saints-live.js; then
               echo "Verified live hymn page, homepage navigation, and Saint of the Day full biography feature."
