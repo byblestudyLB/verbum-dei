@@ -583,17 +583,57 @@
     if(quizAnswered){const options=output.querySelectorAll("[data-quiz-answer]");options.forEach((b,i)=>{if(i===q.correct)b.classList.add("correct")});}
   }
   const featuredSaints=[
-    {en:"Saint Charbel Makhlouf",ar:"القديس شربل مخلوف",date:"July 24",story:"A Maronite monk and hermit from Lebanon, remembered for a life of prayer, simplicity and devotion to the Eucharist.",storyAr:"راهب وناسك ماروني من لبنان، يُذكر بحياة الصلاة والبساطة والتعبّد للقربان المقدّس."},
-    {en:"Saint Rafqa",ar:"القديسة رفقا",date:"March 23",story:"A Lebanese Maronite nun whose life is remembered for prayer, faith and patient hope.",storyAr:"راهبة مارونية لبنانية تُذكر بحياة الصلاة والإيمان والرجاء."},
-    {en:"Saint Nimatullah Al-Hardini",ar:"القديس نعمة الله الحرديني",date:"December 14",story:"A Lebanese Maronite monk and teacher known for a life centred on prayer, study and service.",storyAr:"راهب ومعلّم ماروني لبناني عُرف بحياة تتمحور حول الصلاة والدراسة والخدمة."},
-    {en:"Saint Aquilina of Byblos",ar:"القديسة أكويلينا من جبيل",date:"June 13",story:"A young martyr honoured in the Christian tradition of Byblos.",storyAr:"شهيدة شابّة تُكرّم في التقليد المسيحي في مدينة جبيل."},
-    {en:"Saint Anthony the Great",ar:"القديس أنطونيوس الكبير",date:"January 17",story:"An early Christian monk whose example helped shape the tradition of monastic life.",storyAr:"راهب مسيحي من القرون الأولى، أسهم مثاله في نشأة الحياة الرهبانية."},
-    {en:"Saint Josephine Bakhita",ar:"القديسة جوزفين بخيتا",date:"February 8",story:"A Sudanese-born Canossian sister whose life became a witness to dignity, forgiveness and hope.",storyAr:"راهبة كانوسيّة وُلدت في السودان، وأصبحت حياتها شهادة للكرامة والمغفرة والرجاء."},
-    {en:"Saint Francis of Assisi",ar:"القديس فرنسيس الأسيزي",date:"October 4",story:"Remembered for simplicity, care for creation and joyful service to the poor.",storyAr:"يُذكر بالبساطة والعناية بالخليقة والخدمة المفرحة للفقراء."}
+    {key:"Charbel Makhlouf",en:"Saint Charbel Makhlouf",ar:"القديس شربل مخلوف",feast:"July 24",story:"A Lebanese Maronite monk and hermit whose life was rooted in silence, prayer and devotion to the Eucharist.",storyAr:"راهب وناسك ماروني لبناني عاش الصلاة والصمت والتعبّد للقربان المقدّس.",lesson:"Faith can grow through simple daily acts of prayer and humility.",lessonAr:"الإيمان ينمو أيضًا من خلال الصلاة والتواضع في حياتنا اليومية."},
+    {key:"Rafqa Pietra Choboq Ar-Rayès",en:"Saint Rafqa",ar:"القديسة رفقا",feast:"March 23",story:"A Lebanese Maronite nun remembered for her prayer, perseverance and trust in God.",storyAr:"راهبة مارونية لبنانية عُرفت بالصلاة والثبات والثقة بالله.",lesson:"We can bring our difficulties to God and show compassion to others.",lessonAr:"يمكننا أن نضع صعوباتنا بين يدي الله وأن نعامل الآخرين برحمة."},
+    {key:"Nimatullah Al-Hardini",en:"Saint Nimatullah Al-Hardini",ar:"القديس نعمة الله الحرديني",feast:"December 14",story:"A Lebanese Maronite monk and teacher who dedicated his life to prayer, study and service.",storyAr:"راهب ومعلّم ماروني لبناني كرّس حياته للصلاة والعلم وخدمة الآخرين.",lesson:"Learning, prayer and helping others can all be part of a faithful life.",lessonAr:"العلم والصلاة ومساعدة الآخرين كلّها طرق نعيش بها إيماننا."},
+    {key:"Aquilina of Byblos",en:"Saint Aquilina of Byblos",ar:"القديسة أكويلينا من جبيل",feast:"June 13",story:"A young martyr honoured in the Christian tradition of Byblos. Much of her story comes from ancient tradition.",storyAr:"شهيدة شابّة يُكرّمها التقليد المسيحي في جبيل، وتأتي معظم تفاصيل سيرتها من الروايات الكنسية القديمة.",lesson:"Her traditional story invites us to stand by what is right with courage.",lessonAr:"تدعونا قصتها كما يرويها التقليد إلى التمسّك بالحقّ بشجاعة."},
+    {key:"Anthony the Great",en:"Saint Anthony the Great",ar:"القديس أنطونيوس الكبير",feast:"January 17",story:"An Egyptian monk whose example helped shape Christian monastic life.",storyAr:"راهب مصري ساهم مثاله في نشأة الحياة الرهبانية المسيحية.",lesson:"Making time for quiet reflection can help us listen more closely to God.",lessonAr:"تخصيص وقت للهدوء والتأمّل يساعدنا على الإصغاء إلى الله."},
+    {key:"Josephine Bakhita",en:"Saint Josephine Bakhita",ar:"القديسة جوزفين بخيتا",feast:"February 8",story:"A Sudanese-born sister remembered for dignity, forgiveness and hope.",storyAr:"راهبة وُلدت في السودان، وتُذكر بكرامتها وقدرتها على المغفرة والرجاء.",lesson:"Every person deserves dignity, and forgiveness can be an act of strength.",lessonAr:"لكلّ إنسان كرامته، والمغفرة قد تكون علامة قوّة."},
+    {key:"Francis of Assisi",en:"Saint Francis of Assisi",ar:"القديس فرنسيس الأسيزي",feast:"October 4",story:"An Italian saint remembered for simplicity, care for creation and joyful service to the poor.",storyAr:"قدّيس إيطالي عُرف بالبساطة والعناية بالخليقة وخدمة الفقراء بفرح.",lesson:"We can care for people and creation through small acts of kindness.",lessonAr:"يمكننا أن نهتمّ بالناس وبالخليقة عبر أعمال محبّة بسيطة."}
   ];
+  function saintBiographyParagraphs(value){
+    return String(value || "").trim().split(/\n\s*\n/).filter(Boolean)
+      .map(paragraph=>`<p class="saint-biography-paragraph">${escapeHtml(paragraph.trim()).replace(/\n/g, " ")}</p>`).join("");
+  }
   function showSaintOfDay(){
-    const day=Math.floor(Date.now()/86400000), saint=featuredSaints[((day%featuredSaints.length)+featuredSaints.length)%featuredSaints.length];
-    setPanel("Saint of the Day · قديس اليوم",`<div class="feature-hero"><span class="feature-kicker">${interfaceLabel("TODAY’S SAINT","قديس اليوم")} · ${saint.date.toUpperCase()}</span><h3>${escapeHtml(saint.en)}</h3><p class="arabic" lang="ar" dir="rtl">${escapeHtml(saint.ar)}</p></div><div class="saint-detail">${featureText(saint.story,saint.storyAr)}<p class="meaning">This is a featured daily profile, not a claim that this is the saint listed in the official liturgical calendar today. / هذه نبذة يومية مختارة وليست تأكيدًا أنّ هذا هو قديس التقويم الليتورجي اليوم.</p><button class="text-button" data-view="saints">${interfaceLabel("Explore all saints ↗","اكتشف جميع القديسين ←")}</button></div>`);
+    // Base the featured profile on the calendar day in Beirut, not UTC.
+    const parts=new Intl.DateTimeFormat("en-GB",{
+      timeZone:"Asia/Beirut",year:"numeric",month:"2-digit",day:"2-digit"
+    }).formatToParts(new Date());
+    const part=type=>Number(parts.find(p=>p.type===type)?.value || 0);
+    const dayIndex=Math.floor(Date.UTC(part("year"),part("month")-1,part("day"))/86400000);
+    const saint=featuredSaints[((dayIndex%featuredSaints.length)+featuredSaints.length)%featuredSaints.length];
+    const biography=typeof window.verbumSaintBiographyByName==="function"
+      ? window.verbumSaintBiographyByName(saint.key) : null;
+    const longBiography=biography
+      ? `<div class="saint-bio-facts"><span><strong>${interfaceLabel("Lifetime","سنوات الحياة")}</strong> ${escapeHtml(biography.years)}</span><span><strong>${interfaceLabel("Place","المكان")}</strong> ${escapeHtml(biography.place)}</span></div>
+        <details class="saint-day-fullbio" open>
+          <summary>${interfaceLabel("Full biography — tap to show or hide","السيرة الكاملة — اضغط للعرض أو الإخفاء")}</summary>
+          ${settings.language==="ar"
+            ? `<div class="saint-bio-language arabic" lang="ar" dir="rtl"><h4>السيرة الكاملة</h4>${saintBiographyParagraphs(biography.storyAr)}</div>`
+            : settings.language==="en"
+              ? `<div class="saint-bio-language" lang="en"><h4>Full biography</h4>${saintBiographyParagraphs(biography.storyEn)}</div>`
+              : `<div class="two-language saint-bio-columns"><div class="saint-bio-language" lang="en"><h4>Full biography</h4>${saintBiographyParagraphs(biography.storyEn)}</div><div class="saint-bio-language arabic" lang="ar" dir="rtl"><h4>السيرة الكاملة</h4>${saintBiographyParagraphs(biography.storyAr)}</div></div>`}
+        </details>`
+      : `<p class="meaning">${interfaceLabel("The full biography is temporarily unavailable. Read the summary above or explore the Saints library.","السيرة الكاملة غير متاحة حاليًا. يمكنك قراءة النبذة أعلاه أو زيارة مكتبة القديسين.")}</p>`;
+    setPanel(interfaceTitle("Saint of the Day","قدّيس اليوم"),`
+      <div class="feature-hero saint-day-hero">
+        <span class="feature-kicker">${interfaceLabel("FEATURED SAINT FOR TODAY","قدّيس مختار لهذا اليوم")}</span>
+        <h3>${escapeHtml(saint.en)}</h3>
+        <p class="arabic" lang="ar" dir="rtl">${escapeHtml(saint.ar)}</p>
+        <p class="meaning">${interfaceLabel("Common feast date: ","تاريخ العيد الشائع: ")}${escapeHtml(saint.feast)} · ${interfaceLabel("Dates can vary by Church calendar.","قد يختلف التاريخ بحسب التقويم الكنسي.")}</p>
+      </div>
+      <div class="saint-detail saint-day-detail">
+        <h3>${interfaceLabel("Who was this saint?","مَن هو هذا القدّيس؟")}</h3>
+        ${featureText(saint.story,saint.storyAr)}
+        ${longBiography}
+        <div class="saint-day-lesson">
+          <h3>${interfaceLabel("What can we learn?","ماذا نتعلّم من حياته؟")}</h3>
+          ${featureText(saint.lesson,saint.lessonAr)}
+        </div>
+        <p class="meaning">${interfaceLabel("This is a rotating featured saint, not necessarily the saint listed in OLM's official liturgical calendar today.","هذا قدّيس نختاره من السير للتعرّف إليه، وليس بالضرورة قدّيس اليوم بحسب التقويم الليتورجي الرسمي على موقع الرهبانية اللبنانية المارونية.")}</p>
+        <button class="text-button" data-view="saints">${interfaceLabel("Explore all saints ↗","اكتشف جميع القديسين ←")}</button>
+      </div>`);
   }
   let calendarMonth=new Date().getMonth(),calendarYear=new Date().getFullYear();
   const feastDays={"01-01":"Mary, Mother of God · مريم والدة الإله","01-06":"Epiphany · عيد الدنح","03-19":"Saint Joseph · مار يوسف","03-25":"Annunciation · عيد البشارة","06-29":"Saints Peter and Paul · مار بطرس وبولس","08-15":"Assumption of Mary · انتقال العذراء","09-08":"Nativity of Mary · مولد العذراء","11-01":"All Saints · عيد جميع القديسين","12-08":"Immaculate Conception · الحبل بلا دنس","12-25":"Christmas · عيد الميلاد"};
