@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=20261112-11">
+  <link rel="stylesheet" href="./style.css?v=20261120-hymns1">
 </head>
 <body>
 <div class="page-shell">
@@ -18,11 +18,11 @@
     <nav class="desktop-nav" aria-label="Main navigation">
       <button class="nav-link active" data-view="home" data-i18n="navHome">Home</button>
       <button class="nav-link" data-view="readings" data-i18n="navReadings">Readings</button>
+      <a class="nav-link" href="./hymns.html" style="text-decoration:none">♫ Hymns · تراتيل</a>
       <button class="nav-link" data-view="verse" data-i18n="navVerse">Bible</button>
       <button class="nav-link" data-view="reflection" data-i18n="navReflection">Reflection</button>
       <button class="nav-link" data-view="saints" data-i18n="navSaints">Saints</button>
       <button class="nav-link" data-view="priest" data-i18n="navPriest">Church life</button>
-      <a class="nav-link" href="./hymns.html" style="text-decoration:none">Hymns · تراتيل</a>
       <button class="nav-link" data-view="prayers" data-i18n="navPrayers">Prayers</button>
       <button class="nav-link" data-view="rosary" data-bilingual-en="Rosary" data-bilingual-ar="المسبحة">Rosary</button>
       <button class="nav-link" data-view="gospel" data-bilingual-en="Gospel" data-bilingual-ar="إنجيل اليوم">Gospel</button>
@@ -60,6 +60,18 @@
       <article class="feature-card verse-card"><div class="card-topline"><span class="card-index">02 / SCRIPTURE · الكتاب المقدّس</span><span class="card-symbol">✧</span></div><h3 data-i18n="verseTitle">A verse to carry</h3><p data-i18n="verseDescription">A passage from Scripture in English and Arabic, with a thought to keep.</p><button class="text-button" data-action="verse" data-i18n="findVerse">Find a verse ↗</button></article>
       <article class="feature-card reflection-card"><div class="card-topline"><span class="card-index">03 / REFLECTION · التأمّل</span><span class="card-symbol">◌</span></div><h3 data-i18n="reflectionTitle">A daily reflection</h3><p data-i18n="reflectionDescription">Small reflections and prayers for the ordinary moments of life.</p><button class="text-button" data-action="reflection" data-i18n="readReflection">Take a moment ↗</button></article>
       <article class="feature-card prayer-card"><div class="card-topline"><span class="card-index">04 / PRAYER · الصلاة</span><span class="card-symbol">✝</span></div><h3 data-i18n="prayersTitle">Prayer library</h3><p data-i18n="prayersDescription">Traditional prayers and daily devotions in Arabic and English.</p><button class="text-button" data-view="prayers" data-i18n="openPrayers">Open the prayer library ↗</button></article>
+    </section>
+
+    <section class="hymn-invitation" aria-labelledby="hymnInvitationTitle">
+      <div class="hymn-invitation-copy">
+        <p class="section-kicker">A MOMENT IN SONG · لحظة ترتيل</p>
+        <h2 id="hymnInvitationTitle" data-bilingual-en="A hymn for your heart today." data-bilingual-ar="ترتيلة لقلبك اليوم.">A hymn for your heart today.</h2>
+        <p data-bilingual-en="A little surprise for your time with God: a hymn selected at random, just for today." data-bilingual-ar="مفاجأة صغيرة لوقت صلاتك: ترتيلة تُختار عشوائيًّا لك اليوم.">A little surprise for your time with God: a hymn selected at random, just for today.</p>
+      </div>
+      <div class="hymn-invitation-actions">
+        <a class="hymn-invitation-action primary" href="./hymns.html#today" data-bilingual-en="Discover your hymn ♫" data-bilingual-ar="اكتشف ترتيلتك ♫">Discover your hymn ♫</a>
+        <a class="hymn-invitation-action" href="./hymns.html" data-bilingual-en="Browse spiritual hymns" data-bilingual-ar="تصفّح التراتيل الروحية">Browse spiritual hymns</a>
+      </div>
     </section>
 
     <section class="spotlight-grid">
@@ -106,13 +118,14 @@
     <nav class="side-menu-links" aria-label="Website sections">
       <button class="side-menu-link" data-view="home"><span class="side-menu-icon">⌂</span><span><strong>Home</strong><small>الرئيسية</small></span></button>
       <button class="side-menu-link" data-view="readings"><span class="side-menu-icon">☼</span><span><strong>Daily Readings</strong><small>قراءات اليوم</small></span></button>
+      <a class="side-menu-link" href="./hymns.html" style="text-decoration:none"><span class="side-menu-icon">♫</span><span><strong>Spiritual Hymns</strong><small>تراتيل روحية</small></span></a>
+      <a class="side-menu-link" href="./hymns.html#today" style="text-decoration:none"><span class="side-menu-icon">✦</span><span><strong>Your Hymn Today</strong><small>ترتيلة لك اليوم</small></span></a>
       <button class="side-menu-link" data-view="gospel"><span class="side-menu-icon">✝</span><span><strong>Gospel of the Day</strong><small>إنجيل اليوم</small></span></button>
       <button class="side-menu-link" data-view="verse"><span class="side-menu-icon">▤</span><span><strong>Bible & Verses</strong><small>الكتاب المقدّس والآيات</small></span></button>
       <button class="side-menu-link" data-view="reflection"><span class="side-menu-icon">✧</span><span><strong>Daily Reflection</strong><small>تأمّل اليوم</small></span></button>
       <button class="side-menu-link" data-view="saints"><span class="side-menu-icon">◉</span><span><strong>Lebanese Saints</strong><small>القدّيسون اللبنانيون</small></span></button>
       <button class="side-menu-link" data-view="saint-day"><span class="side-menu-icon">✦</span><span><strong>Saint of the Day</strong><small>قدّيس اليوم</small></span></button>
       <button class="side-menu-link" data-view="priest"><span class="side-menu-icon">⌂</span><span><strong>Church Life</strong><small>الحياة الكنسيّة</small></span></button>
-      <a class="side-menu-link" href="./hymns.html" style="text-decoration:none"><span class="side-menu-icon">♫</span><span><strong>Spiritual Hymns</strong><small>تراتيل روحية</small></span></a>
       <button class="side-menu-link" data-view="prayers"><span class="side-menu-icon">♡</span><span><strong>Prayer Library</strong><small>مكتبة الصلوات</small></span></button>
       <button class="side-menu-link" data-view="rosary"><span class="side-menu-icon">✝</span><span><strong>Rosary</strong><small>المسبحة</small></span></button>
       <button class="side-menu-link" data-view="quiz"><span class="side-menu-icon">?</span><span><strong>Bible Quiz</strong><small>مسابقة الكتاب المقدّس</small></span></button>
