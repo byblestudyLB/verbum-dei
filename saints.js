@@ -120,6 +120,19 @@
     }
   }
   entries.sort((a, b) => (a.group === b.group ? a.en.localeCompare(b.en) : a.group === "Lebanese" ? -1 : 1));
+  // Share the vetted bilingual biographies with the daily saint feature.
+  // Keep saints.js as the single source of biography text to avoid mismatches.
+  window.verbumSaintBiographyByName = (name) => {
+    if (typeof name !== "string") return null;
+    const saint = entries.find(item => item.en.toLocaleLowerCase() === name.toLocaleLowerCase());
+    if (!saint || !saint.storyEn || !saint.storyAr) return null;
+    return {
+      en: saint.en, ar: saint.ar, status: saint.status,
+      years: saint.years, place: saint.place,
+      storyEn: saint.storyEn, storyAr: saint.storyAr
+    };
+  };
+
   const esc = (s) => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
   async function loadSaintImages(list) {
