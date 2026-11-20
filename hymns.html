@@ -42,7 +42,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;color:var(--muted);font
 <h1>Spiritual Hymns <span lang="ar" dir="rtl">· تراتيل روحية</span></h1>
 <p class="lede">Listen, reflect and pray with voices from our tradition. <span lang="ar" dir="rtl">اسمع التراتيل وصلِّ من قلبك، من تراث كنيستنا.</span></p>
 <div class="content">
-<section class="highlight" aria-label="Hymn of the Day"><p class="eyebrow">Hymn of the Day · ترتيلة اليوم</p><strong id="dailyName" lang="ar" dir="rtl"></strong><small id="dailyEnglish"></small><div class="actions"><button class="btn primary" id="dailyPlay">▶ Listen · استمع</button><button class="btn" id="dailyFav" aria-pressed="false" aria-label="Save daily hymn as favorite">♡ Save · المفضّلة</button></div><p style="color:var(--muted);font-size:.85rem">A different selection each Beirut day · تتغيّر الترتيلة يوميًّا بحسب توقيت بيروت.</p></section>
+<section class="highlight" id="today" aria-label="A hymn chosen at random for you today"><p class="eyebrow">A hymn for you today · ترتيلة لك اليوم</p><strong id="dailyName" lang="ar" dir="rtl"></strong><small id="dailyEnglish"></small><p style="color:var(--soft);font-size:.94rem;margin:10px 0 0">Maybe this is the hymn your heart needs today. <span lang="ar" dir="rtl">لعلّها الترتيلة التي يحتاجها قلبك اليوم.</span></p><div class="actions"><button class="btn primary" id="dailyPlay" type="button">▶ Listen · استمع</button><button class="btn" id="dailyFav" type="button" aria-pressed="false" aria-label="Save daily hymn as favorite">♡ Save · المفضّلة</button><button class="btn" id="dailyAgain" type="button">↻ Another hymn · ترتيلة أخرى</button></div><p style="color:var(--muted);font-size:.85rem">A random surprise for your prayer, saved for each Beirut day on this device. <span lang="ar" dir="rtl">اختيار عشوائي يتجدّد كل يوم بتوقيت بيروت، ويُحفَظ على جهازك.</span></p></section>
 <section class="playerbox" aria-label="YouTube hymn player"><div id="player" class="player"><span>Select a hymn below to play it here.<br><span lang="ar" dir="rtl">اختَر ترتيلة من القائمة للاستماع.</span></span></div><p id="nowTitle" class="playing" aria-live="polite"></p><p id="ytLink" class="linkline"></p></section>
 </div>
 <div class="searchrow"><input type="search" id="search" aria-label="Search hymn titles in Arabic or English" placeholder="Search hymns · ابحث عن ترتيلة" autocomplete="off"><button class="btn small" id="clear">Clear · مسح</button></div>
@@ -88,12 +88,43 @@ function render(){
   $("#dailyFav").setAttribute("aria-pressed",String(favorites.includes(daily.id)));
   $("#dailyFav").textContent=favorites.includes(daily.id)?"♥ Saved · محفوظة":"♡ Save · المفضّلة";
 }
-const localDate=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Beirut",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
-const dayNumber=Number(localDate.replace(/\D/g,""));
-const daily=hymns[dayNumber%hymns.length];
-$("#dailyName").textContent=daily.ar;$("#dailyEnglish").textContent=daily.en;
+const beirutParts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Beirut",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+const part=type=>beirutParts.find(p=>p.type===type)?.value||"";
+const localDate=part("year")+"-"+part("month")+"-"+part("day");
+const dailyKey="verbum-hymn-of-day-v2";
+function randomIndex(length){
+  if(typeof crypto!=="undefined"&&typeof crypto.getRandomValues==="function"){
+    const buf=new Uint32Array(1);crypto.getRandomValues(buf);return buf[0]%length;
+  }
+  return Math.floor(Math.random()*length);
+}
+function randomHymn(excludedId){
+  // Give each of the seven categories an equal chance, regardless of collection size.
+  const availableCats=Object.keys(categories).filter(cat=>hymns.some(h=>h.cat===cat&&h.id!==excludedId));
+  const category=availableCats[randomIndex(availableCats.length)];
+  const choices=hymns.filter(h=>h.cat===category&&h.id!==excludedId);
+  return choices[randomIndex(choices.length)];
+}
+let daily=null;
+try{
+  const saved=JSON.parse(localStorage.getItem(dailyKey)||"null");
+  if(saved?.date===localDate)daily=hymns.find(h=>h.id===saved.id)||null;
+}catch{}
+function saveDaily(){try{localStorage.setItem(dailyKey,JSON.stringify({date:localDate,id:daily.id}))}catch{}}
+function showDaily(){
+  $("#dailyName").textContent=daily.ar;
+  $("#dailyEnglish").textContent=daily.en;
+  render();
+}
+if(!daily){daily=randomHymn();saveDaily()}
+showDaily();
 $("#dailyPlay").addEventListener("click",()=>play(daily.id));
 $("#dailyFav").addEventListener("click",()=>fav(daily.id));
+$("#dailyAgain").addEventListener("click",()=>{
+  daily=randomHymn(daily.id);
+  saveDaily();
+  showDaily();
+});
 $("#clear").addEventListener("click",()=>{$("#search").value="";selectedCat="all";render();$("#search").focus()});
 $("#search").addEventListener("input",render);
 document.addEventListener("click",e=>{const filter=e.target.closest("[data-cat]");if(filter){selectedCat=filter.dataset.cat;render();return}const p=e.target.closest("[data-play]");if(p){play(p.dataset.play);return}const f=e.target.closest("[data-fav]");if(f)fav(f.dataset.fav)});
