@@ -1,7 +1,7 @@
 "use strict";
-const CACHE_NAME="verbum-dei-install-v1";
+const CACHE_NAME="verbum-dei-install-v2";
 const OFFLINE_URL=new URL("./offline.html",self.registration.scope).href;
-const PREFETCH=["./offline.html","./icons/icon-192.png","./icons/icon-512.png","./icons/app-icon.svg"];
+const PREFETCH=["./offline.html","./icons/icon-192.png","./icons/icon-512.png"];
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(PREFETCH)).then(()=>self.skipWaiting()));
 });
