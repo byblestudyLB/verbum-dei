@@ -65,10 +65,12 @@ jobs:
           }
           for(const page of ["index.html","hymns.html"]){
             const source=fs.readFileSync(page,"utf8");
-            if(!source.includes('rel="manifest" href="./manifest.webmanifest"')||!source.includes('src="./pwa.js?v=20261120-1"'))throw new Error("Install support missing from "+page);
+            if(!source.includes('rel="manifest" href="./manifest.webmanifest"')||!source.includes('src="./pwa.js?v=20261120-apk3"'))throw new Error("Install support missing from "+page);
           }
           const home=fs.readFileSync("index.html","utf8");
           if(!home.includes('id="installAppHomeButton"')||!home.includes('id="installAppButton"')||!home.includes('id="installDialog"'))throw new Error("Missing install UI");
+          const officialApk="https://github.com/byblestudyLB/verbum-dei/releases/download/android-preview-3/Verbum-Dei-Android.apk";
+          if(!home.includes('id="downloadAndroidApk"')||(home.split(officialApk).length-1)<2)throw new Error("Official Android APK link missing from homepage or install dialog");
           if(!fs.readFileSync("sw.js","utf8").includes('event.request.mode!=="navigate"'))throw new Error("Service worker must not cache live readings");
           console.log("Validated installable PWA, 3 PNG icons, safe offline fallback and install instructions.");
           NODE

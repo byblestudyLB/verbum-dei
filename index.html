@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=20261120-situations1">
+  <link rel="stylesheet" href="./style.css?v=20261120-apk3">
 </head>
 <body>
 <div class="page-shell">
@@ -62,9 +62,15 @@
       <div><p class="section-kicker" data-i18n="welcomeKicker">YOUR DAILY PAUSE</p><h2 data-i18n="welcomeTitle">A moment that belongs to you.</h2></div>
       <div class="date-chip" id="todayDate">Today</div>
     </section>
-    <section class="app-install-strip" aria-label="Install Verbum Dei for free">
-      <div><strong>Verbum Dei on your phone · Verbum Dei على هاتفك</strong><small>Free to install, with your own app icon · تطبيق مجاني مع أيقونة على الشاشة الرئيسية</small></div>
-      <button type="button" id="installAppHomeButton" class="app-install-action">Install free · نزّل مجانًا</button>
+    <section class="app-install-strip" aria-label="Download Verbum Dei for Android or install on iPhone">
+      <div class="app-install-copy">
+        <strong>Download Verbum Dei · حمّل تطبيق Verbum Dei</strong>
+        <small>Free Android APK and iPhone Home Screen app · تطبيق أندرويد مجاني وإضافة للآيفون</small>
+      </div>
+      <div class="app-install-actions">
+        <a class="app-install-action" id="downloadAndroidApk" href="https://github.com/byblestudyLB/verbum-dei/releases/download/android-preview-3/Verbum-Dei-Android.apk" target="_blank" rel="noopener noreferrer" aria-label="Download official Verbum Dei Android APK">Download Android APK · تحميل أندرويد ⬇</a>
+        <button type="button" id="installAppHomeButton" class="app-install-how">iPhone / How to install · آيفون / طريقة التثبيت</button>
+      </div>
     </section>
     <section class="feature-grid">
       <article class="feature-card daily-card"><div class="card-topline"><span class="card-index">01 / TODAY · اليوم</span><span class="card-symbol">✳</span></div><h3 data-i18n="dailyTitle">The daily readings</h3><p data-i18n="dailyDescription">The Gospel, Epistle and liturgical color from the Maronite calendar.</p><button class="text-button" data-action="daily" data-i18n="openReadings">Explore today's readings ↗</button></article>
@@ -152,13 +158,18 @@
     <button id="closeInstallDialog" type="button" class="install-dialog-close" aria-label="Close install instructions">×</button>
     <p class="section-kicker">FREE APP · تطبيق مجاني</p>
     <h2 id="installDialogTitle">Verbum Dei on your phone<br><span lang="ar" dir="rtl">Verbum Dei على هاتفك</span></h2>
-    <p>Install for free without the App Store or Google Play. Your prayers, readings and hymns remain on the same Verbum Dei website.</p>
-    <div class="install-guide"><strong>iPhone · آيفون</strong><p>Open the site in <b>Safari</b>, tap <b>Share</b>, choose <b>Add to Home Screen</b>, turn on <b>Open as Web App</b> if shown, then tap <b>Add</b>.</p><p lang="ar" dir="rtl">افتح الموقع في سفاري، اضغط «مشاركة»، ثم «إضافة إلى الشاشة الرئيسية»، وفعّل «فتح كتطبيق» إذا ظهر الخيار، واضغط «إضافة».</p></div>
-    <div class="install-guide"><strong>Android · أندرويد</strong><p>Open in <b>Chrome</b>, tap the <b>⋮</b> menu, and choose <b>Install app</b> or <b>Add to Home screen</b>.</p><p lang="ar" dir="rtl">افتح الموقع في كروم، واضغط قائمة ⋮ ثم «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».</p></div>
+    <p>Enjoy Verbum Dei for free on Android or iPhone. · استمتع بتطبيق Verbum Dei مجانًا على أندرويد وآيفون.</p>
+    <div class="install-guide"><strong>Android APK · تطبيق أندرويد</strong>
+      <p>Tap below to download the official Verbum Dei Android APK directly from our public GitHub release.</p>
+      <a class="install-download-link" href="https://github.com/byblestudyLB/verbum-dei/releases/download/android-preview-3/Verbum-Dei-Android.apk" target="_blank" rel="noopener noreferrer">Download Android APK · تحميل تطبيق أندرويد ⬇</a>
+      <p>Open the downloaded file to install. Android may ask you to approve installation from your browser. Only use the official GitHub link above.</p>
+      <p lang="ar" dir="rtl">اضغط الزر لتحميل التطبيق من إصدارنا الرسمي على GitHub، ثم افتح الملف لتثبيته. قد يطلب هاتفك السماح بالتثبيت من المتصفح. نزّل التطبيق فقط من رابطنا الرسمي.</p>
+    </div>
+    <div class="install-guide"><strong>iPhone · آيفون</strong><p>Open this website in <b>Safari</b>, tap <b>Share</b> (square with upward arrow), choose <b>Add to Home Screen</b>, turn on <b>Open as Web App</b> if shown, then tap <b>Add</b>. The app icon will appear on your Home Screen.</p><p lang="ar" dir="rtl">افتح الموقع في Safari، اضغط زر المشاركة (مربّع وسهم للأعلى)، واختر «إضافة إلى الشاشة الرئيسية»، وفعّل «فتح كتطبيق» إذا ظهر، ثم اضغط «إضافة». ستظهر أيقونة التطبيق على الشاشة الرئيسية.</p></div>
     <p class="install-note">The newest Gospel, Epistle and other daily updates still need internet access. No subscription, notifications or account required.</p>
   </div>
 </dialog>
 <dialog id="settingsDialog" class="settings-dialog"><form method="dialog" class="settings-form"><div class="dialog-heading"><div><p class="section-kicker" data-i18n="settingsKicker">MAKE IT YOURS</p><h2 data-i18n="settingsTitle">Settings</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div><label for="displayLanguage" data-i18n="languageLabel">Display language</label><select id="displayLanguage"><option value="both">English + العربية</option><option value="en">English</option><option value="ar">العربية</option></select><label for="fontSize" data-i18n="fontLabel">Website text size</label><select id="fontSize"><option value="small">Small · صغير</option><option value="normal">Normal · عادي</option><option value="large">Large · كبير</option><option value="xlarge">Extra large · كبير جدًا</option></select><label for="colorTheme" data-i18n="themeLabel">Color mood</label><select id="colorTheme"><option value="midnight">Midnight & copper · منتصف الليل والنحاس</option><option value="daylight">Daylight · ضوء النهار</option></select><button class="primary-button" id="saveSettings" value="save" data-i18n="saveSettings">Save settings</button></form></dialog>
 <script src="./botData.js" defer></script><script src="./prayers.js?v=20261120-situations1" defer></script><script src="./app.js?v=20261120-situations1" defer></script><script src="./saints.js?v=20261120-saintbio1" defer></script>
-<script src="./pwa.js?v=20261120-1" defer></script>
+<script src="./pwa.js?v=20261120-apk3" defer></script>
 </body></html>
