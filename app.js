@@ -251,6 +251,38 @@
   }
 
 
+  let prayerSearchTerm = "";
+  function normalizePrayerSearch(value) {
+    return String(value || "").normalize("NFKD")
+      .replace(/[\u064B-\u065F\u0670]/g, "")
+      .replace(/[أإآٱ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه")
+      .toLocaleLowerCase().trim();
+  }
+  function applyPrayerSearch() {
+    const input = document.querySelector("#prayerSearch");
+    if (!input) return;
+    const needle = normalizePrayerSearch(input.value);
+    const cards = Array.from(document.querySelectorAll(".prayer-entry[data-prayer-id]"));
+    const items = window.PRAYER_DATA?.items || [];
+    let visible = 0;
+    cards.forEach(card => {
+      const item = items.find(p => p.id === card.dataset.prayerId);
+      const searchable = item ? [item.enTitle, item.arTitle, item.en, item.ar].join(" ") : "";
+      const matches = !needle || normalizePrayerSearch(searchable).includes(needle);
+      card.hidden = !matches;
+      if (matches) visible++;
+    });
+    const count = document.querySelector("#prayerCount");
+    if (count) count.textContent = settings.language === "ar"
+      ? `عرض ${visible} من ${cards.length} صلاة`
+      : settings.language === "en"
+        ? `Showing ${visible} of ${cards.length} prayers`
+        : `Showing ${visible} of ${cards.length} prayers · عرض ${visible} من ${cards.length} صلاة`;
+    const empty = document.querySelector("#prayerSearchEmpty");
+    if (empty) empty.hidden = visible > 0;
+  }
+
+
   function showPrayers(category = "all") {
     const library = window.PRAYER_DATA;
     if (!library?.items?.length) {
@@ -260,13 +292,13 @@
     const isArabic = settings.language === "ar";
     const title = interfaceTitle("Prayer Library","مكتبة الصلوات");
     const categories = library.categories.map(item =>
-      `<button class="prayer-filter ${item.id === category ? "active" : ""}" data-prayer-category="${item.id}">${settings.language === "both" ? item.en + " · " + item.ar : isArabic ? item.ar : item.en}</button>`
+      `<button type="button" aria-pressed="${item.id === category}" class="prayer-filter ${item.id === category ? "active" : ""}" data-prayer-category="${escapeHtml(item.id)}">${interfaceLabel(escapeHtml(item.en), escapeHtml(item.ar))}</button>`
     ).join("");
     const items = library.items.filter(item => category === "all" || item.category === category);
     const cards = items.map(item => {
       const body = languageBlocks(item.en, item.ar, "prayer-text");
       const note = settings.language === "both" ? item.noteEn + " · " + item.noteAr : isArabic ? item.noteAr : item.noteEn;
-      return `<article class="prayer-entry"><div class="prayer-entry-heading"><span class="prayer-cross">✝</span><div><h3>${interfaceLabel(escapeHtml(item.enTitle),escapeHtml(item.arTitle))}</h3><small>${escapeHtml(note)}</small></div></div>${body}</article>`;
+      return `<article class="prayer-entry" data-prayer-id="${escapeHtml(item.id)}"><div class="prayer-entry-heading"><span class="prayer-cross">✝</span><div><h3>${interfaceLabel(escapeHtml(item.enTitle),escapeHtml(item.arTitle))}</h3><small>${escapeHtml(note)}</small></div></div>${body}</article>`;
     }).join("");
     const intro = interfaceLabel("A collection of traditional Catholic prayers and original daily devotions. Choose a prayer and take a quiet moment.","مجموعة من الصلوات الكاثوليكية المتوارثة والتأمّلات اليومية. اختر صلاة وخذ لحظة هادئة.");
     setPanel(title, `
@@ -274,11 +306,21 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Lord%27s_Prayer_and_a_crucifix.jpg" alt="A crucifix resting on an open Bible showing the Lord's Prayer" loading="lazy">
         <div class="prayer-library-overlay"><span>VERBUM DEI · ORA ET LABORA</span><h3>${interfaceLabel("Lift your heart to God","ارفع قلبك إلى الله")}</h3><p>${intro}</p></div>
       </div>
-      <div class="prayer-filters">${categories}</div>
-      <div class="prayer-list">${cards}</div>
+      <div class="prayer-search-panel">
+        <label for="prayerSearch">${interfaceLabel("Find a prayer by name or need", "ابحث عن صلاة بالاسم أو بالحاجة")}</label>
+        <div class="prayer-search-row">
+          <input id="prayerSearch" type="search" autocomplete="off" aria-controls="prayerList" placeholder="${escapeHtml(interfaceTitle("Search a prayer or situation…", "ابحث عن صلاة أو ظرف…"))}" value="${escapeHtml(prayerSearchTerm)}">
+          <button type="button" class="prayer-search-clear" data-prayer-search-clear>${interfaceLabel("Clear", "مسح")}</button>
+        </div>
+      </div>
+      <div class="prayer-filters" role="group" aria-label="${escapeHtml(interfaceTitle("Prayer categories", "أقسام الصلوات"))}">${categories}</div>
+      <p id="prayerCount" role="status" class="prayer-result-count" aria-live="polite"></p>
+      <div class="prayer-list" id="prayerList">${cards}</div>
+      <p id="prayerSearchEmpty" class="prayer-search-empty" hidden>${interfaceLabel("No prayers match your search. Try another word or category.", "لا توجد صلاة تطابق بحثك. جرّب كلمة أخرى أو قسمًا مختلفًا.")}</p>
       <p class="prayer-credit">${interfaceLabel('Image: James Chan (jclk8888) · CC0 Public Domain · <a href="https://commons.wikimedia.org/wiki/File:Lord%27s_Prayer_and_a_crucifix.jpg" target="_blank" rel="noopener">Image details</a>','الصورة: جيمس تشان · الملكية العامة · <a href="https://commons.wikimedia.org/wiki/File:Lord%27s_Prayer_and_a_crucifix.jpg" target="_blank" rel="noopener">تفاصيل الصورة</a>')}</p>
       <p class="meaning">${interfaceLabel("Note: The traditional prayers are established Catholic prayers. The daily devotions and saint-intercession texts are original devotional wording for this site, not official liturgical texts.","ملاحظة: الصلوات الأساسية هي صلوات كاثوليكية متوارثة. أمّا الصلوات التأمّلية وطلبات الشفاعة فهي صيغ تعبّدية أُعدّت للموقع وليست نصوصًا طقسية رسمية.")}</p>
     `);
+    applyPrayerSearch();
   }
 
 
@@ -673,7 +715,22 @@
     output.innerHTML = `<p class="empty-state">${interfaceLabel(translations.en.emptyPrompt,translations.ar.emptyPrompt)}</p>`;
   }
 
+  document.addEventListener("input", event => {
+    if (event.target?.id === "prayerSearch") {
+      prayerSearchTerm = event.target.value;
+      applyPrayerSearch();
+    }
+  });
+
   document.addEventListener("click", event => {
+    const prayerClear = event.target.closest("[data-prayer-search-clear]");
+    if (prayerClear) {
+      prayerSearchTerm = "";
+      const field = document.querySelector("#prayerSearch");
+      if (field) { field.value = ""; applyPrayerSearch(); field.focus(); }
+      return;
+    }
+
     const prayerCategory = event.target.closest("[data-prayer-category]");
     if (prayerCategory) { showPrayers(prayerCategory.dataset.prayerCategory); return; }
 
