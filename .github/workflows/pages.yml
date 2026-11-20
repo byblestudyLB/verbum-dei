@@ -171,16 +171,23 @@ jobs:
         with:
           artifact_name: pages-${{ github.run_id }}-${{ github.run_attempt }}
       
-      - name: Verify live hymn library route
+      - name: Verify live hymn page and homepage navigation
         run: |
           for attempt in 1 2 3 4 5 6 7 8; do
-            if curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/hymns.html?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/hymns-live.html && grep -q 'const categories=' /tmp/hymns-live.html; then
-              echo "Live hymns route is available and contains the seven-category implementation."
+            if curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/hymns.html?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/hymns-live.html &&
+               grep -q 'const categories=' /tmp/hymns-live.html &&
+               grep -q 'id="dailyAgain"' /tmp/hymns-live.html &&
+               grep -q 'verbum-hymn-of-day-v2' /tmp/hymns-live.html &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/hymns-home.html &&
+               grep -q 'Your Hymn Today' /tmp/hymns-home.html &&
+               grep -q 'class="hymn-invitation"' /tmp/hymns-home.html &&
+               grep -q 'href="./hymns.html#today"' /tmp/hymns-home.html; then
+              echo "Verified live hymn page, random daily feature, menu shortcut and homepage invitation."
               exit 0
             fi
-            echo "Published hymn page not yet verified (attempt $attempt/8)."
+            echo "Live hymn page and menu not yet verified (attempt $attempt/8)."
             sleep 15
           done
-          echo "Live hymn page could not be verified." >&2
+          echo "Live hymn page and menu could not be verified." >&2
           exit 1
 
