@@ -38,10 +38,10 @@ jobs:
           import fs from "node:fs";
           import vm from "node:vm";
           const page = fs.readFileSync("hymns.html", "utf8");
-          const script = page.match(/<script>([\\s\\S]*?)<\\/script>/)?.[1];
+          const script = page.match(/<script>([\s\S]*?)<\/script>/)?.[1];
           if (!script) throw new Error("Hymns inline script missing");
           new vm.Script(script, {filename:"hymns.html"});
-          const raw = script.match(/const hymns=(\\[[\\s\\S]*?\\]);\\s*const categories=/)?.[1];
+          const raw = script.match(/const hymns=(\[[\s\S]*?\]);\s*const categories=/)?.[1];
           if (!raw) throw new Error("Hymns metadata missing");
           const hymns = JSON.parse(raw);
           if (hymns.length < 50) throw new Error("Expected 50+ curated hymns");
@@ -58,7 +58,7 @@ jobs:
             chapters.add(h.video + ":" + h.start);
           }
           const home = fs.readFileSync("index.html", "utf8");
-          if ((home.match(/href="\\.\\/hymns\\.html"/g) || []).length < 2) throw new Error("Hymn links missing from main and mobile navigation");
+          if ((home.match(/href="\.\/hymns\.html"/g) || []).length < 2) throw new Error("Hymn links missing from main and mobile navigation");
           console.log("Hymn validation passed: " + hymns.length + " titled chapters across all seven categories.");
           NODE
 
