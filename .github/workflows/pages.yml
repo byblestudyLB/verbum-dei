@@ -32,6 +32,36 @@ jobs:
         with:
           node-version: 22
 
+      - name: Validate bilingual hymn library
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import vm from "node:vm";
+          const page = fs.readFileSync("hymns.html", "utf8");
+          const script = page.match(/<script>([\\s\\S]*?)<\\/script>/)?.[1];
+          if (!script) throw new Error("Hymns inline script missing");
+          new vm.Script(script, {filename:"hymns.html"});
+          const raw = script.match(/const hymns=(\\[[\\s\\S]*?\\]);\\s*const categories=/)?.[1];
+          if (!raw) throw new Error("Hymns metadata missing");
+          const hymns = JSON.parse(raw);
+          if (hymns.length < 50) throw new Error("Expected 50+ curated hymns");
+          const expectedCategories = ["charbel","rafqa","rita","mary","christmas","jesus","easter"];
+          for (const category of expectedCategories) {
+            if (!hymns.some(h => h.cat === category)) throw new Error("Category missing: " + category);
+          }
+          const ids = new Set(), chapters = new Set();
+          for (const h of hymns) {
+            if (!/^[A-Za-z0-9_-]{11}$/.test(h.video) || !h.ar || !h.en) throw new Error("Invalid hymn metadata");
+            if (!Number.isInteger(h.start) || h.start < 0 || h.end != null && h.end <= h.start) throw new Error("Invalid YouTube chapter");
+            if (ids.has(h.id) || chapters.has(h.video + ":" + h.start)) throw new Error("Duplicate hymn");
+            ids.add(h.id);
+            chapters.add(h.video + ":" + h.start);
+          }
+          const home = fs.readFileSync("index.html", "utf8");
+          if ((home.match(/href="\\.\\/hymns\\.html"/g) || []).length < 2) throw new Error("Hymn links missing from main and mobile navigation");
+          console.log("Hymn validation passed: " + hymns.length + " titled chapters across all seven categories.");
+          NODE
+
       - name: Install the OLM scraper dependency
         run: |
           npm install --prefix "$RUNNER_TEMP/olm-deps" cheerio@1.0.0
@@ -101,7 +131,7 @@ jobs:
       - name: Assemble static website
         run: |
           mkdir -p _site/data
-          cp index.html app.js botData.js prayers.js saints.js style.css _site/
+          cp index.html app.js botData.js prayers.js saints.js style.css hymns.html _site/
           for attempt in 1 2 3 4; do
             if node scripts/generate-data.mjs; then
               exit 0
@@ -140,3 +170,17 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: pages-${{ github.run_id }}-${{ github.run_attempt }}
+      
+      - name: Verify live hymn library route
+        run: |
+          for attempt in 1 2 3 4 5 6 7 8; do
+            if curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/hymns.html?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/hymns-live.html && grep -q 'const categories=' /tmp/hymns-live.html; then
+              echo "Live hymns route is available and contains the seven-category implementation."
+              exit 0
+            fi
+            echo "Published hymn page not yet verified (attempt $attempt/8)."
+            sleep 15
+          done
+          echo "Live hymn page could not be verified." >&2
+          exit 1
+
