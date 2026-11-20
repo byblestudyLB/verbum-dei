@@ -282,3 +282,20 @@ dialog.side-menu .side-menu-heading{padding-top:8px}
   .saint-bio-language{padding:0 15px 15px;font-size:15px}
   .saint-bio-language.arabic{font-size:21px}
 }
+
+
+/* Prayer Library: high-contrast bilingual search and touch-friendly filters. */
+.prayer-search-panel{margin:25px 0 10px;padding:18px 20px;background:#1b3039;border:1px solid rgba(197,142,99,.30)}
+.prayer-search-panel label{display:block;color:#f1e8dd;font-size:15px;font-weight:600;line-height:1.6;margin-bottom:10px}
+.prayer-search-row{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+#prayerSearch{min-width:220px;flex:1 1 270px;background:#111e28;color:#f3eee5;border:1px solid #708079;border-radius:3px;font:inherit;font-size:16px;padding:13px 14px;min-height:49px}
+#prayerSearch::placeholder{color:#bfc6c2;opacity:1}
+.prayer-search-clear{background:transparent;color:#f1e8dd;border:1px solid #708079;border-radius:3px;padding:11px 18px;min-height:49px;font:inherit;cursor:pointer}
+.prayer-search-clear:hover,.prayer-search-clear:focus-visible{background:#29404a;border-color:var(--copper-light)}
+.prayer-filters{gap:9px}
+.prayer-filter{min-height:44px;padding:10px 13px;font-size:13px;line-height:1.35;cursor:pointer}
+.prayer-filter:focus-visible,#prayerSearch:focus-visible{outline:3px solid var(--copper-light);outline-offset:3px}
+.prayer-result-count{font-size:13px;color:#c3cfc7;margin:10px 0}
+.prayer-search-empty{padding:20px;background:#1b3039;border:1px solid var(--line);color:#f1e8dd;font-size:15px}
+.prayer-entry[hidden],.prayer-search-empty[hidden]{display:none!important}
+@media(max-width:700px){.prayer-search-panel{padding:15px 13px}.prayer-filter{font-size:13px;padding:10px 12px}.prayer-search-clear{flex:0 1 auto}}
