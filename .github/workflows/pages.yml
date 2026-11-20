@@ -32,6 +32,43 @@ jobs:
         with:
           node-version: 22
 
+      - name: Validate Saint of the Day biographies
+        run: |
+          node --check app.js
+          node --check saints.js
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import vm from "node:vm";
+          const sandbox = {
+            document: { querySelector: () => ({}) },
+            window: { addEventListener: () => {} }
+          };
+          vm.runInNewContext(fs.readFileSync("saints.js", "utf8"), sandbox, {timeout: 10000});
+          const lookup = sandbox.window.verbumSaintBiographyByName;
+          if (typeof lookup !== "function") throw new Error("Saint biography lookup not registered");
+          const names = [
+            "Charbel Makhlouf", "Rafqa Pietra Choboq Ar-Rayès",
+            "Nimatullah Al-Hardini", "Aquilina of Byblos",
+            "Anthony the Great", "Josephine Bakhita", "Francis of Assisi"
+          ];
+          for (const name of names) {
+            const bio = lookup(name);
+            if (!bio?.storyEn || bio.storyEn.length < 80 || !bio.storyAr || bio.storyAr.length < 40) {
+              throw new Error("Complete bilingual biography missing for " + name);
+            }
+            console.log("Biography available in both languages: " + name);
+          }
+          const app = fs.readFileSync("app.js", "utf8");
+          if (!app.includes("window.verbumSaintBiographyByName(saint.key)") ||
+              !app.includes('class="saint-day-fullbio" open') ||
+              !app.includes('timeZone:"Asia/Beirut"')) {
+            throw new Error("Daily biography feature is not correctly connected");
+          }
+          const home = fs.readFileSync("index.html", "utf8");
+          if (!home.includes("20261120-saintbio1")) throw new Error("Saint biography assets are not cache-busted");
+          console.log("Daily saint biographies validated in 7 featured profiles.");
+          NODE
+
       - name: Validate bilingual hymn library
         run: |
           node --input-type=module <<'NODE'
@@ -184,8 +221,14 @@ jobs:
                curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/hymns-home.html &&
                grep -q 'Your Hymn Today' /tmp/hymns-home.html &&
                grep -q 'class="hymn-invitation"' /tmp/hymns-home.html &&
-               grep -q 'href="./hymns.html#today"' /tmp/hymns-home.html; then
-              echo "Verified live hymn page, random daily feature, menu shortcut and homepage invitation."
+               grep -q 'href="./hymns.html#today"' /tmp/hymns-home.html &&
+               grep -q '20261120-saintbio1' /tmp/hymns-home.html &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/app.js?verify=${GITHUB_RUN_ID}" -o /tmp/app-live.js &&
+               grep -q 'window.verbumSaintBiographyByName(saint.key)' /tmp/app-live.js &&
+               grep -q 'saint-day-fullbio' /tmp/app-live.js &&
+               curl -fsSL --max-time 20 "https://byblestudyLB.github.io/verbum-dei/saints.js?verify=${GITHUB_RUN_ID}" -o /tmp/saints-live.js &&
+               grep -q 'window.verbumSaintBiographyByName' /tmp/saints-live.js; then
+              echo "Verified live hymn page, homepage navigation, and Saint of the Day full biography feature."
               exit 0
             fi
             echo "Live hymn page and menu not yet verified (attempt $attempt/8)."
