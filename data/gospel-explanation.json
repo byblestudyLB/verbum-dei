@@ -4,15 +4,17 @@
   "model": "Qwen3 4B · locally run",
   "generatedAt": "2026-11-21T01:58:57.889Z",
   "english": {
-    "whatHappened": "Jesus says that Abraham would have been happy to see his day. The Jews ask how he could have seen Abraham if he’s not fifty yet. Jesus replies that he existed before Abraham. The Jews try to throw stones at him, but Jesus disappears through the crowd and leaves the temple.",
-    "jesusTeaches": "Jesus shows that he is older than time itself. He existed before Abraham, who lived long ago. This means Jesus has a special relationship with God that goes beyond human history.",
-    "liveToday": "When you feel like you don’t have enough time or energy, remember that God’s love is always present, even before you were born. Try to share this peace with someone who is struggling.",
-    "prayer": "Lord Jesus, you are the one who existed before time began. Help us see your love in the people around us today. Amen."
+    "whatHappened": "Jesus says that Abraham rejoiced at the prospect of seeing his day and was glad. His listeners question how Jesus, not yet fifty years old, could have seen Abraham. Jesus answers, “Before Abraham was, I am.” They pick up stones to throw at him, but Jesus hides himself and leaves the Temple.",
+    "jesusTeaches": "Jesus speaks of his existence before Abraham and reveals something extraordinary about who he is. His words invite us to take his identity seriously, even when we do not fully understand.",
+    "liveToday": "When a part of the Gospel is difficult to understand, do not rush to reject it. Read Jesus’ words carefully, ask questions, and make room for faith to grow.",
+    "prayer": "Lord Jesus, help me listen to your words with an open heart. Guide me when I have questions and teach me to trust you. Amen."
   },
   "arabic": {
-    "whatHappened": "يقول يسوع أن آبراهام سَيَرْجُو رؤيته. يُسَلِّمُ اليهود كيف يُرَى آبراهام لو لم يَكُنْ يسوع يَعْمَلُهُ بعد خمسين سنة. يُجَابُ أن يسوع كان موجودًا قبل آبراهام. يحاول اليهود رمي الحجارة عليه، لكن يسوع يَتَفَرَّغُ من الجماعة ويَغْدِي من المَزَارِعَةَ.",
-    "jesusTeaches": "يُظهر يسوع أنه أَكْبَرُ من الزمن نفسه. كان موجودًا قبل آبراهام الذي عاش في الماضي البعيد. هذا يعني أن يسوع يَعْمَلُ عَلَى عَلَمٍ خاصٍّ مع الله يَفْرَغُ خارجَ التاريخ البشري.",
-    "liveToday": "إذا شعرت أنك لست تَعْمَلُ كفاية وقت أو طاقة، تذكَّر أن حب الله موجود دائمًا، حتى قبل أن تَعْمَلَ. حاول مشاركة هذا الهدوء مع شخص يَعْرِضُ صعوبات.",
-    "prayer": "اللَّهُ يسوع، أنت الذي كان موجودًا قبل أن يبدأ الزمن. اسْتَعْمِلْنا رؤية حبك في الأشخاص حولنا اليوم. آمَن."
-  }
+    "whatHappened": "قال يسوع إن إبراهيم فرح لأنه سيرى يومه، وقد رآه وفرح. فتساءل بعض الذين كانوا يسمعونه: كيف رأيت إبراهيم وأنت لم تبلغ الخمسين بعد؟ فأجابهم يسوع: «قبل أن يكون إبراهيم، أنا كائن». عندها حملوا حجارة ليرجموه، لكن يسوع اختفى عن أنظارهم وخرج من الهيكل.",
+    "jesusTeaches": "يكشف يسوع بكلامه أنه موجود قبل إبراهيم، ويدعونا إلى التأمل في هويته وفي علاقته الفريدة بالله. قد يصعب علينا فهم كلامه من أول مرة، لكنه يدعونا إلى الإصغاء والتأمل.",
+    "liveToday": "إذا قرأت كلامًا في الإنجيل ولم تفهمه، لا تتسرع في رفضه. اقرأه بهدوء، واسأل عن معناه، وافتح قلبك لتفهم رسالة يسوع أكثر.",
+    "prayer": "يا رب يسوع، ساعدني أن أصغي إلى كلامك بقلب منفتح. أرشدني عندما تراودني الأسئلة، وعلّمني أن أثق بك. آمين."
+  },
+  "reviewedAt": "2026-11-21T03:17:39Z",
+  "reviewNote": "Human-reviewed bilingual wording for John 8:56-59; OLM direct access unavailable during review."
 }
