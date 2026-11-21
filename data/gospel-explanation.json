@@ -1,18 +1,18 @@
 {
-  "date": "2026-11-20",
-  "gospelReference": "يو 8 / 51 - 55",
-  "model": "Manually reviewed bilingual explanation",
-  "generatedAt": "2026-11-20T05:39:27+02:00",
+  "date": "2026-11-21",
+  "gospelReference": "يو 8 / 56 - 59",
+  "model": "Qwen3 4B · locally run",
+  "generatedAt": "2026-11-21T01:58:57.889Z",
   "english": {
-    "whatHappened": "Jesus promises that whoever keeps his word will never see death. His listeners object that Abraham and the prophets died, and they question who Jesus claims to be. Jesus answers that he does not seek glory for himself: the Father glorifies him. He says that he knows the Father and keeps his word, even though his listeners do not recognize him.",
-    "jesusTeaches": "Jesus calls us to hold on to his word and trust his promise of life with God. His promise does not mean that believers never experience physical death; it points to life that death cannot ultimately take away. He also shows that knowing God is expressed through faithfulness to God's word, not through seeking personal glory.",
-    "liveToday": "Choose one teaching of Jesus to put into practice today, especially when it asks you to be truthful or loving. When death or loss makes you afraid, bring that fear to God and remember Jesus' promise of lasting life.",
-    "prayer": "Lord Jesus, help us listen to your word and live by it. Strengthen our trust in your promise of life, and teach us to seek the Father's glory rather than our own. Amen."
+    "whatHappened": "Jesus says that Abraham would have been happy to see his day. The Jews ask how he could have seen Abraham if he’s not fifty yet. Jesus replies that he existed before Abraham. The Jews try to throw stones at him, but Jesus disappears through the crowd and leaves the temple.",
+    "jesusTeaches": "Jesus shows that he is older than time itself. He existed before Abraham, who lived long ago. This means Jesus has a special relationship with God that goes beyond human history.",
+    "liveToday": "When you feel like you don’t have enough time or energy, remember that God’s love is always present, even before you were born. Try to share this peace with someone who is struggling.",
+    "prayer": "Lord Jesus, you are the one who existed before time began. Help us see your love in the people around us today. Amen."
   },
   "arabic": {
-    "whatHappened": "يقول يسوع إنّ من يحفظ كلامه لن يرى الموت إلى الأبد. فيعترض بعض سامعيه لأنّ إبراهيم والأنبياء ماتوا، ويسألونه من يظنّ نفسه. فيجيب يسوع أنّه لا يطلب المجد لنفسه، بل إنّ الآب هو الذي يمجّده. ويؤكّد أنّه يعرف الآب ويحفظ كلامه، بينما لا يعرفه الذين يخاطبهم.",
-    "jesusTeaches": "يدعونا يسوع إلى التمسّك بكلامه والثقة بوعده بالحياة مع الله. هذا الوعد لا يعني أنّ المؤمن لن يموت جسديًّا، بل يشير إلى حياة لا يستطيع الموت أن ينهيها. ويعلّمنا أيضًا أنّ معرفة الله تظهر في الأمانة لكلامه، لا في طلب المجد لأنفسنا.",
-    "liveToday": "لنختر اليوم تعليمًا من كلام يسوع ونحاول أن نعيشه، خصوصًا في الصدق والمحبّة. وإذا خفنا من الموت أو فقدان شخص عزيز، يمكننا أن نصلّي ونتمسّك بوعد يسوع بالحياة الدائمة.",
-    "prayer": "يا ربّ يسوع، ساعدنا على الإصغاء إلى كلامك والعمل به. قوِّ ثقتنا بوعدك بالحياة، وعلّمنا أن نطلب مجد الآب لا مجد أنفسنا. آمين."
+    "whatHappened": "يقول يسوع أن آبراهام سَيَرْجُو رؤيته. يُسَلِّمُ اليهود كيف يُرَى آبراهام لو لم يَكُنْ يسوع يَعْمَلُهُ بعد خمسين سنة. يُجَابُ أن يسوع كان موجودًا قبل آبراهام. يحاول اليهود رمي الحجارة عليه، لكن يسوع يَتَفَرَّغُ من الجماعة ويَغْدِي من المَزَارِعَةَ.",
+    "jesusTeaches": "يُظهر يسوع أنه أَكْبَرُ من الزمن نفسه. كان موجودًا قبل آبراهام الذي عاش في الماضي البعيد. هذا يعني أن يسوع يَعْمَلُ عَلَى عَلَمٍ خاصٍّ مع الله يَفْرَغُ خارجَ التاريخ البشري.",
+    "liveToday": "إذا شعرت أنك لست تَعْمَلُ كفاية وقت أو طاقة، تذكَّر أن حب الله موجود دائمًا، حتى قبل أن تَعْمَلَ. حاول مشاركة هذا الهدوء مع شخص يَعْرِضُ صعوبات.",
+    "prayer": "اللَّهُ يسوع، أنت الذي كان موجودًا قبل أن يبدأ الزمن. اسْتَعْمِلْنا رؤية حبك في الأشخاص حولنا اليوم. آمَن."
   }
 }
