@@ -1,20 +1,18 @@
 {
-  "date": "2026-11-22",
-  "gospelReference": "لو 1 / 26 - 38",
-  "model": "Editorial review · Gospel of Luke 1:26-38",
-  "generatedAt": "2026-11-22T03:16:10Z",
+  "date": "2026-11-23",
+  "gospelReference": "لو 11 / 27 - 32",
+  "model": "Qwen3 4B · locally run",
+  "generatedAt": "2026-11-22T22:46:55.358Z",
   "english": {
-    "whatHappened": "God sends the angel Gabriel to Mary in Nazareth. Gabriel tells her that she will give birth to Jesus, who will be called the Son of the Most High and whose kingdom will have no end. Mary asks how this can happen, since she is a virgin. Gabriel tells her that the Holy Spirit will come upon her, mentions Elizabeth's unexpected pregnancy, and says that nothing is impossible with God. Mary accepts God's word.",
-    "jesusTeaches": "Jesus does not speak in this passage. Through Gabriel's message, the Gospel introduces Jesus as the promised king and Son of God. Mary's thoughtful question and willing response show faith that listens and seeks to understand.",
-    "liveToday": "When something feels uncertain, you can ask sincere questions instead of pretending to understand everything. Like Mary, take time to listen and respond to what is good with courage and trust.",
-    "prayer": "Lord, give me a listening heart like Mary's. Help me ask honest questions, trust your guidance, and respond with courage. Amen."
+    "whatHappened": "While Jesus was speaking, a woman from the crowd raised her voice and said, 'Blessed is the womb that bore you and the breasts that nursed you!' But Jesus replied, 'On the contrary, blessed are those who hear God's word and keep it.' Then, as people gathered around him, Jesus said this generation is evil and seeks signs. He explained that the Son of Man will be like the sign of Jonah to this generation, and that the Queen of the South and the people of Nineveh will judge this generation because they were wise and repented.",
+    "jesusTeaches": "Jesus teaches that listening and keeping God's word is more important than being born or raised in a special family. He shows that even those who are not part of his group—like the Queen of the South and the Ninevites—will recognize his value because they followed his message.",
+    "liveToday": "Today, try to listen carefully to God's word in your life and share it with others. When you hear something important, ask yourself if you can act on it.",
+    "prayer": "Lord Jesus, help me to hear your word and keep it in my heart. May I be like those who listen and follow you, even when it's hard."
   },
   "arabic": {
-    "whatHappened": "أرسل الله الملاك جبرائيل إلى مريم في الناصرة. أخبرها أنها ستلد يسوع، الذي سيُدعى ابن العليّ، وأن ملكه لن يكون له نهاية. سألت مريم كيف يمكن أن يحدث ذلك وهي عذراء. فأوضح لها الملاك أن الروح القدس سيحلّ عليها، وأخبرها بحمل أليصابات رغم كبر سنّها، وقال إن لا شيء مستحيل عند الله. فقبلت مريم كلام الله.",
-    "jesusTeaches": "لا يتكلّم يسوع في هذا المقطع. لكن رسالة الملاك تعرّفنا إليه بوصفه ابن الله والملك الموعود. وتُظهر مريم بإصغائها وسؤالها ثم قبولها أن الإيمان لا يمنعنا من طرح الأسئلة والسعي إلى الفهم.",
-    "liveToday": "عندما تواجه أمرًا لا تفهمه، لا تخف من طرح الأسئلة بصدق. خذ وقتك للإصغاء، وحاول أن تختار الخير بشجاعة وثقة، كما فعلت مريم.",
-    "prayer": "يا رب، أعطني قلبًا يصغي مثل قلب مريم. ساعدني أن أطرح أسئلتي بصدق، وأن أثق بإرشادك وأستجيب بشجاعة. آمين."
-  },
-  "reviewedAt": "2026-11-22T03:16:10Z",
-  "reviewNote": "Editorially reviewed against the complete narrative of Luke 1:26-38. OLM date/reference corroborated from live GitHub build logs; direct OLM page access unavailable."
+    "whatHappened": "عندما كان يتحدث يسوع، امرأة من الجماعة رفعت صوتها وقالت: \"العُدَّة المُباركة التي وَضَعَتْكَ وَالحَمَلَة التي أَطْعَمَتْكَ!\" فرد يسوع: \"على العكس، المُبارَكون هم من يَسْمَعُونَ كَلام الله وَيُحْفَظُونَهُ.\" ثم قال يسوع لِمَنْ جَمَعُوا حوله: \"هذه الجيل سيُعَدُّ خَاطئًا وَيَحْتَاجُ إلى عَلَامَاتٍ. أَنَا أَمْلَأُ لِهَذَا الجيل كَعَلَامَةِ يُونَسَ، وَالْمَلْكَةُ الْمَلْحَةُ وَأَهْلُ نِينِيَةٍ سَيُقَدِّمُونَ هَذَا الجيل لِأَنَّهُمْ كَانُوا عَلَى الْحِكْمَةِ وَأَرْجَعُوا عَلَى الْخَطَأِ.\"",
+    "jesusTeaches": "يسوع يُعلِّم أنَّ السَّمْعَ وَالْحُفْظَ لِكَلام الله هُمَّا أَكْبَرُ مِنَ الْوَضْعِ أو الْحَمْلِ فِي عَائِلَةٍ مُعَلَّقَةٍ. يُشَرِّحُ أَنَّ أَحَدَ الْمَجْدِيَّةِ الَّذِي لَيْسَ فِي مَجْمَعِهِ، كَالْمَلْكَةِ الْمَلْحَةِ وَأَهْلِ نِينِيَةٍ، سَيَعْرِفُونَ قِيمَتِهِ لِأَنَّهُمْ اتَّبَعُوا مَجْدَهُ.",
+    "liveToday": "اليوم، حاول أن تَسْمَعَ كَلام الله في حياتك وَتَشَرِّكَهُ لِأَحَدٍ. عندما تَسْمَعُ شَيْئًا مُهِمًا، اسْأَلْ نَفْسَكَ: أَمَّا أَنْ أَعْمَلَ عَلَيْهِ؟",
+    "prayer": "اللَّهُ يَسُوعُ، اسْتَعِدْ لِأَنْ أَسْمَعَ كَلامك وَأَحْفَظَهُ فِي قَلْبِي. اسْتَعِدْ لِأَنْ أَكُونَ كَالَّذِينَ يَسْمَعُونَ وَيَتَّبِعُونَكَ، وَلَيْسَ يَكُونُ سَهْلًا."
+  }
 }
