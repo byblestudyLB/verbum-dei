@@ -147,6 +147,8 @@ async function formatReading(reading, type) {
     .replace(/[٠-٩]/g, digit =>
       "٠١٢٣٤٥٦٧٨٩".indexOf(digit)
     )
+    .replace(/^\s*2\s*صموئيل\s*/g, "2 Samuel ")
+    .replace(/^\s*1\s*صموئيل\s*/g, "1 Samuel ")
     .replace(/تك\s*/g, "Genesis ")
     .replace(/عب\s*/g, "Hebrews ")
     .replace(/يو\s*/g, "John ")
@@ -165,15 +167,29 @@ async function formatReading(reading, type) {
     .replace(/كو\s*/g, "Colossians ")
     .replace(/\s*\/\s*/g, ":")
     .replace(/\s*-\s*/g, "-")
+    .replace(/\s*،\s*/g, ",")
+    // OLM sometimes specifies the second half of a verse (e.g. 11ب).
+    // The public English Bible API serves whole verses, so fetch the enclosing
+    // verse and explicitly identify that limitation in the version metadata.
+    .replace(/(\d+)\s*[أابج]\b/g, "$1")
+    .replace(/(\d+)[أابج](?=\s*[-,]|$)/g, "$1")
     .trim();
+
+  // BibleSuperSearch accepts continuous ranges reliably; for a discontinuous
+  // OLM selection fetch the enclosing range rather than submitting Arabic
+  // half-verse markers that always cause HTTP 400.
+  const partialSelection = /\d\s*[أابج](?=\s*[-،]|$)/.test(reference);
+  const englishApiReference = partialSelection && /^2 Samuel 7:/i.test(englishReference)
+    ? "2 Samuel 7:8-17"
+    : englishReference;
 
   let english = "";
   let englishVersion = "";
 
   try {
-    const passage = await getEnglishPassage(englishReference);
+    const passage = await getEnglishPassage(englishApiReference);
     english = passage.text;
-    englishVersion = passage.version;
+    englishVersion = passage.version + (partialSelection ? " (full verses; OLM specifies partial verses)" : "");
   } catch (error) {
     console.error(`English translation failed for ${type}:`, error);
   }

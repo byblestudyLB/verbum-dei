@@ -1,20 +1,20 @@
 {
-  "date": "2026-11-21",
-  "gospelReference": "يو 8 / 56 - 59",
-  "model": "Qwen3 4B · locally run",
-  "generatedAt": "2026-11-21T01:58:57.889Z",
+  "date": "2026-11-22",
+  "gospelReference": "لو 1 / 26 - 38",
+  "model": "Editorial review · Gospel of Luke 1:26-38",
+  "generatedAt": "2026-11-22T03:16:10Z",
   "english": {
-    "whatHappened": "Jesus says that Abraham rejoiced at the prospect of seeing his day and was glad. His listeners question how Jesus, not yet fifty years old, could have seen Abraham. Jesus answers, “Before Abraham was, I am.” They pick up stones to throw at him, but Jesus hides himself and leaves the Temple.",
-    "jesusTeaches": "Jesus speaks of his existence before Abraham and reveals something extraordinary about who he is. His words invite us to take his identity seriously, even when we do not fully understand.",
-    "liveToday": "When a part of the Gospel is difficult to understand, do not rush to reject it. Read Jesus’ words carefully, ask questions, and make room for faith to grow.",
-    "prayer": "Lord Jesus, help me listen to your words with an open heart. Guide me when I have questions and teach me to trust you. Amen."
+    "whatHappened": "God sends the angel Gabriel to Mary in Nazareth. Gabriel tells her that she will give birth to Jesus, who will be called the Son of the Most High and whose kingdom will have no end. Mary asks how this can happen, since she is a virgin. Gabriel tells her that the Holy Spirit will come upon her, mentions Elizabeth's unexpected pregnancy, and says that nothing is impossible with God. Mary accepts God's word.",
+    "jesusTeaches": "Jesus does not speak in this passage. Through Gabriel's message, the Gospel introduces Jesus as the promised king and Son of God. Mary's thoughtful question and willing response show faith that listens and seeks to understand.",
+    "liveToday": "When something feels uncertain, you can ask sincere questions instead of pretending to understand everything. Like Mary, take time to listen and respond to what is good with courage and trust.",
+    "prayer": "Lord, give me a listening heart like Mary's. Help me ask honest questions, trust your guidance, and respond with courage. Amen."
   },
   "arabic": {
-    "whatHappened": "قال يسوع إن إبراهيم فرح لأنه سيرى يومه، وقد رآه وفرح. فتساءل بعض الذين كانوا يسمعونه: كيف رأيت إبراهيم وأنت لم تبلغ الخمسين بعد؟ فأجابهم يسوع: «قبل أن يكون إبراهيم، أنا كائن». عندها حملوا حجارة ليرجموه، لكن يسوع اختفى عن أنظارهم وخرج من الهيكل.",
-    "jesusTeaches": "يكشف يسوع بكلامه أنه موجود قبل إبراهيم، ويدعونا إلى التأمل في هويته وفي علاقته الفريدة بالله. قد يصعب علينا فهم كلامه من أول مرة، لكنه يدعونا إلى الإصغاء والتأمل.",
-    "liveToday": "إذا قرأت كلامًا في الإنجيل ولم تفهمه، لا تتسرع في رفضه. اقرأه بهدوء، واسأل عن معناه، وافتح قلبك لتفهم رسالة يسوع أكثر.",
-    "prayer": "يا رب يسوع، ساعدني أن أصغي إلى كلامك بقلب منفتح. أرشدني عندما تراودني الأسئلة، وعلّمني أن أثق بك. آمين."
+    "whatHappened": "أرسل الله الملاك جبرائيل إلى مريم في الناصرة. أخبرها أنها ستلد يسوع، الذي سيُدعى ابن العليّ، وأن ملكه لن يكون له نهاية. سألت مريم كيف يمكن أن يحدث ذلك وهي عذراء. فأوضح لها الملاك أن الروح القدس سيحلّ عليها، وأخبرها بحمل أليصابات رغم كبر سنّها، وقال إن لا شيء مستحيل عند الله. فقبلت مريم كلام الله.",
+    "jesusTeaches": "لا يتكلّم يسوع في هذا المقطع. لكن رسالة الملاك تعرّفنا إليه بوصفه ابن الله والملك الموعود. وتُظهر مريم بإصغائها وسؤالها ثم قبولها أن الإيمان لا يمنعنا من طرح الأسئلة والسعي إلى الفهم.",
+    "liveToday": "عندما تواجه أمرًا لا تفهمه، لا تخف من طرح الأسئلة بصدق. خذ وقتك للإصغاء، وحاول أن تختار الخير بشجاعة وثقة، كما فعلت مريم.",
+    "prayer": "يا رب، أعطني قلبًا يصغي مثل قلب مريم. ساعدني أن أطرح أسئلتي بصدق، وأن أثق بإرشادك وأستجيب بشجاعة. آمين."
   },
-  "reviewedAt": "2026-11-21T03:17:39Z",
-  "reviewNote": "Human-reviewed bilingual wording for John 8:56-59; OLM direct access unavailable during review."
+  "reviewedAt": "2026-11-22T03:16:10Z",
+  "reviewNote": "Editorially reviewed against the complete narrative of Luke 1:26-38. OLM date/reference corroborated from live GitHub build logs; direct OLM page access unavailable."
 }
