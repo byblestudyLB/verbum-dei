@@ -143,7 +143,7 @@ async function formatReading(reading, type) {
 
   const excerpt = htmlToText(reading.excerpt_ar || "");
 
-  const englishReference = reference
+  const englishReference = reference.normalize("NFKC").replace(/\p{M}/gu, "")
     .replace(/[٠-٩]/g, digit =>
       "٠١٢٣٤٥٦٧٨٩".indexOf(digit)
     )
@@ -152,7 +152,7 @@ async function formatReading(reading, type) {
     .replace(/تك\s*/g, "Genesis ")
     .replace(/عب\s*/g, "Hebrews ")
     .replace(/يو\s*/g, "John ")
-    .replace(/مت\s*/g, "Matthew ")
+    .replace(/^متى?\s*/g, "Matthew ")
     .replace(/مر\s*/g, "Mark ")
     .replace(/لو\s*/g, "Luke ")
     // Match longer OLM abbreviations before shorter prefixes:
@@ -266,7 +266,7 @@ export default async () => {
     // Mark (مر), Luke (لو), and John (يو). Numbered letters (مثل 1 يو) are
     // deliberately excluded.
     const isGospelReading = (reading) => {
-      const reference = String(reading?.reference || "")
+      const reference = String(reading?.reference || "").normalize("NFKC").replace(/\p{M}/gu, "")
         .replace(/[٠-٩]/g, digit => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
         .trim();
       return /^(?:متى?|مر|لو|يو)\s*\d/.test(reference);
