@@ -178,6 +178,9 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/olm-deps" cheerio@1.0.0
           ln -s "$RUNNER_TEMP/olm-deps/node_modules" "$GITHUB_WORKSPACE/node_modules"
 
+      - name: Validate local public-domain English Bible and passage lookup
+        run: node scripts/test-web-bible.mjs
+
       - name: Verify today's OLM readings and explanation before starting the model
         id: verify-olm
         run: |

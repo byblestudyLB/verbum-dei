@@ -1,0 +1,3 @@
+# Local World English Bible
+Public-domain World English Bible (66-book edition), sourced from https://ebible.org/find/details.php?id=engwebp via https://github.com/midvash/bible-data/tree/9586bd8228a747962df1ee8692730422fb7eb2ec/versions/en/web.
+Imported without changing verse wording; JSON reorganized by chapter and verse. Source metadata reports 66 books, 1189 chapters, 31098 verses. OLM still determines dates, Arabic readings, references and liturgical metadata. No English Scripture HTTP requests are needed. Missing books/verses fail closed rather than invent or substitute text. Deuterocanonical books are not in this edition. To update, verify public-domain source and run node scripts/test-web-bible.mjs.

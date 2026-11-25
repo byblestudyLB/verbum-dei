@@ -2,7 +2,7 @@
 import * as cheerio from "cheerio";
 
 const OLM_BASE_URL = "https://olm.org.lb/ar/liturgical-calendar";
-const BIBLE_API = "https://api.biblesupersearch.com/api";
+import { getEnglishPassage } from "./web-passage.js";
 
 // OLM's response is currently being decoded with the wrong character encoding.
 function fixEncoding(value) {
@@ -39,53 +39,6 @@ function fixObjectEncoding(value) {
 
 function htmlToText(html) {
   return cheerio.load(html || "").text().replace(/\s+/g, " ").trim();
-}
-
-async function getEnglishPassage(reference) {
-  // Prefer the World English Bible, then use the public-domain KJV.
-  // Retry transient API failures: the daily build must not publish a reading
-  // with Arabic only when the English service briefly times out or rate-limits.
-  const versions = [
-    { module: "web", name: "World English Bible" },
-    { module: "kjv", name: "King James Version" }
-  ];
-
-  for (const version of versions) {
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        const url = new URL(BIBLE_API);
-        url.searchParams.set("bible", version.module);
-        url.searchParams.set("reference", reference);
-        url.searchParams.set("data_format", "minimal");
-
-        const response = await fetch(url, {
-          headers: { "Accept": "application/json" }
-        });
-        if (!response.ok) {
-          console.warn(`${version.name} returned HTTP ${response.status} for ${reference} (attempt ${attempt}/3).`);
-        } else {
-          const payload = await response.json();
-          const verses = payload.results?.[version.module];
-          const text = Array.isArray(verses)
-            ? verses.map(verse => verse.text || "").filter(Boolean).join(" ").trim()
-            : "";
-          if (text && !payload.errors?.length) {
-            return { text, version: version.name };
-          }
-          console.warn(`${version.name} returned no usable verses for ${reference} (attempt ${attempt}/3).`);
-        }
-      } catch (error) {
-        console.error(`Could not load ${version.name} for ${reference} (attempt ${attempt}/3):`, error);
-      }
-
-      if (attempt < 3) {
-        await new Promise(resolve => setTimeout(resolve, 500 * attempt));
-      }
-    }
-  }
-
-  console.error(`No English Bible text could be retrieved for ${reference} from WEB or KJV.`);
-  return { text: "", version: "" };
 }
 
 function getField(object, possibleKeys) {
@@ -187,11 +140,11 @@ async function formatReading(reading, type) {
   let englishVersion = "";
 
   try {
-    const passage = await getEnglishPassage(englishApiReference);
+    const passage = getEnglishPassage(englishApiReference);
     english = passage.text;
     englishVersion = passage.version + (partialSelection ? " (full verses; OLM specifies partial verses)" : "");
   } catch (error) {
-    console.error(`English translation failed for ${type}:`, error);
+    console.error(`Local English Bible lookup failed for ${type}:`, error);
   }
 
   return {

@@ -105,3 +105,9 @@ jobs:
             https://api.github.com/repos/byblestudyLB/verbum-dei/actions/workflows/pages.yml/dispatches \
             -d '{"ref":"main"}'
           echo "Recovery deployment was requested. The next scheduled check will verify the live result."
+
+      - name: Report failed website validation even after recovery request
+        if: always() && steps.verify.outcome == 'failure'
+        run: |
+          echo "Website validation failed. A recovery request does not establish a healthy deployment." >&2
+          exit 1
