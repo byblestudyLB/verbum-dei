@@ -1,18 +1,18 @@
 {
-  "date": "2026-11-23",
-  "gospelReference": "لو 11 / 27 - 32",
+  "date": "2026-11-25",
+  "gospelReference": "متّى 13 / 54 - 58",
   "model": "Qwen3 4B · locally run",
-  "generatedAt": "2026-11-22T22:46:55.358Z",
+  "generatedAt": "2026-11-25T00:40:09.470Z",
   "english": {
-    "whatHappened": "As Jesus was speaking, a woman in the crowd praised the mother who gave birth to him and nursed him. Jesus replied that those who hear God's word and obey it are blessed. When the crowds grew, he challenged their demand for a sign: they would receive the sign of Jonah. He recalled how the Queen of the South traveled to hear Solomon's wisdom and how the people of Nineveh repented at Jonah's preaching. Both examples would stand as witnesses against those who refused to listen, because someone greater than Solomon and Jonah was among them.",
-    "jesusTeaches": "Jesus does not reject his mother. He points to a blessing open to everyone: listening to God's word and putting it into practice. Instead of demanding more signs, people are called to respond to the truth already before them. The Queen of the South sought wisdom, and Nineveh changed its ways; Jesus invites his listeners to do the same.",
-    "liveToday": "Read a short part of the Gospel carefully today. Ask what it calls you to change, then take one small, concrete step. Rather than waiting for a special sign, pay attention to the good you already know you should do.",
-    "prayer": "Lord Jesus, open my heart to your word. Give me the humility to listen, the courage to change, and the strength to live what you teach. Amen."
+    "whatHappened": "Jesus went to his hometown, Nazareth, and taught in the synagogue. The people were amazed by his wisdom and miracles, but they got upset because they knew him as the carpenter's son, his family members, and his close connections. They were offended by him, so Jesus said that a prophet isn't honored except in their own country and home. Because of their lack of faith, he didn't perform many miracles there.",
+    "jesusTeaches": "Jesus shows that people often don't respect those who are familiar with them. He teaches that a prophet's honor comes from their own community, not from outside. When people don't believe, God's work doesn't happen much there.",
+    "liveToday": "When you feel like people don't respect you because of who you are, try to share your gifts gently. Also, when you see someone who doesn't believe, be patient and kind without forcing them.",
+    "prayer": "Lord, help us to see your wisdom in our everyday lives. When we feel unloved or misunderstood, remind us that you honor those who know us. May we always be open to your grace."
   },
   "arabic": {
-    "whatHappened": "بينما كان يسوع يتكلّم، رفعت امرأة من الجمع صوتها ومدحت الأم التي حملته وأرضعته. فأجابها يسوع بأن الطوبى لمن يسمعون كلام الله ويعملون به. وعندما ازدحم الناس حوله، تحدّث عن جيل يطلب آية، وقال إن الآية التي ستُعطى له هي آية يونان. وذكّرهم بملكة الجنوب التي جاءت من بعيد لتسمع حكمة سليمان، وبأهل نينوى الذين تابوا عندما سمعوا دعوة يونان. وأوضح أن هذين المثالين يدينان من يرفض الإصغاء، لأن بينهم من هو أعظم من سليمان ويونان.",
-    "jesusTeaches": "لا يقلّل يسوع من شأن أمّه، بل يبيّن أن البركة متاحة لكل إنسان يسمع كلام الله ويعمل به. وهو يدعونا إلى ألّا نبقى نطلب علامات جديدة، بل أن نستجيب للحق الذي وصل إلينا. فقد بحثت ملكة الجنوب عن الحكمة، وتاب أهل نينوى عندما سمعوا الدعوة إلى التوبة.",
-    "liveToday": "اقرأ اليوم مقطعًا قصيرًا من الإنجيل بهدوء. اسأل نفسك: ما الخطوة التي يدعوني الله إلى القيام بها؟ ثم حاول أن تطبّق ما فهمته في موقف بسيط، من دون أن تنتظر علامة استثنائية.",
-    "prayer": "يا رب يسوع، افتح قلبي لكلامك. أعطني التواضع لأصغي، والشجاعة لأغيّر ما يجب تغييره، والقوّة لأعيش بحسب تعليمك. آمين."
+    "whatHappened": "جاء يسوع إلى مدينته نزareth ودرس في المدرسة الكنيسة. كان الناس مدهشين من حكمة وعجائبه، لكنهم اضطربوا لأنهم يعلمونه كابن لصانع الخشب، وعُمليات عائلته، وعلاقاته القريبة. انتقدواه، فقال يسوع: \"لا يُحترم الرسول إلا في مدينته وعُملياته\". بسبب عدم إيمانهم، لم يُعَمِّل عجائب كثيرة هناك.",
+    "jesusTeaches": "يسوع يُظهر أن الناس غالبًا لا يُحترمون من يُعرفونهم. يُعلّم أن احترام الرسول يُنبع من مجتمعه، وليس من خارج ذلك. عندما لا يُؤمن الناس، لا تُحدث عجائب الله كثيرًا هناك.",
+    "liveToday": "إذا شعرت أن الناس لا يُحترمونك لأنك من شخص ما، حاول شارك مهاراتك برفق. أيضًا، عندما ترى شخصًا لا يُؤمن، كن صبورًا وودودًا دون إجباره.",
+    "prayer": "اللهم اجعلنا نرى حكمةك في حياتنا اليومية. عندما نشعر بأننا غير مُحترمون أو غير فهم، اذكرنا أنك تُحترم من يعْرفونا. اجعلنا نبقى مفتوحين لعفويتك دائمًا."
   }
 }
