@@ -1,18 +1,18 @@
 {
   "date": "2026-11-25",
   "gospelReference": "متّى 13 / 54 - 58",
-  "model": "Qwen3 4B · locally run",
-  "generatedAt": "2026-11-25T00:40:09.470Z",
+  "model": "Reviewed bilingual explanation",
+  "generatedAt": "2026-11-25T03:37:22Z",
   "english": {
-    "whatHappened": "Jesus went to his hometown, Nazareth, and taught in the synagogue. The people were amazed by his wisdom and miracles, but they got upset because they knew him as the carpenter's son, his family members, and his close connections. They were offended by him, so Jesus said that a prophet isn't honored except in their own country and home. Because of their lack of faith, he didn't perform many miracles there.",
-    "jesusTeaches": "Jesus shows that people often don't respect those who are familiar with them. He teaches that a prophet's honor comes from their own community, not from outside. When people don't believe, God's work doesn't happen much there.",
-    "liveToday": "When you feel like people don't respect you because of who you are, try to share your gifts gently. Also, when you see someone who doesn't believe, be patient and kind without forcing them.",
-    "prayer": "Lord, help us to see your wisdom in our everyday lives. When we feel unloved or misunderstood, remind us that you honor those who know us. May we always be open to your grace."
+    "whatHappened": "Jesus returned to his hometown and taught in the synagogue. The people were amazed at his wisdom and mighty works. Yet they questioned how someone they knew as the carpenter's son, whose mother and family they knew, could have such wisdom and power. They took offense at him. Jesus pointed out that a prophet can be honored elsewhere but rejected in his own hometown and household. He did not perform many mighty works there because of their unbelief.",
+    "jesusTeaches": "Familiarity can blind us to who Jesus truly is. The people knew his family but failed to welcome him with faith. Jesus invites us to look beyond our assumptions and receive his teaching with an open heart. Their unbelief prevented them from welcoming what he offered; it does not mean that his power was limited.",
+    "liveToday": "Listen to Jesus with faith, even when his words challenge your expectations. Do not dismiss someone simply because you know their background. Ask God to help you recognize his work in ordinary life.",
+    "prayer": "Lord Jesus, help us recognize you with faith and humility. Free us from prejudice and open our hearts to your wisdom. Teach us to welcome your word even when it challenges us. Amen."
   },
   "arabic": {
-    "whatHappened": "جاء يسوع إلى مدينته نزareth ودرس في المدرسة الكنيسة. كان الناس مدهشين من حكمة وعجائبه، لكنهم اضطربوا لأنهم يعلمونه كابن لصانع الخشب، وعُمليات عائلته، وعلاقاته القريبة. انتقدواه، فقال يسوع: \"لا يُحترم الرسول إلا في مدينته وعُملياته\". بسبب عدم إيمانهم، لم يُعَمِّل عجائب كثيرة هناك.",
-    "jesusTeaches": "يسوع يُظهر أن الناس غالبًا لا يُحترمون من يُعرفونهم. يُعلّم أن احترام الرسول يُنبع من مجتمعه، وليس من خارج ذلك. عندما لا يُؤمن الناس، لا تُحدث عجائب الله كثيرًا هناك.",
-    "liveToday": "إذا شعرت أن الناس لا يُحترمونك لأنك من شخص ما، حاول شارك مهاراتك برفق. أيضًا، عندما ترى شخصًا لا يُؤمن، كن صبورًا وودودًا دون إجباره.",
-    "prayer": "اللهم اجعلنا نرى حكمةك في حياتنا اليومية. عندما نشعر بأننا غير مُحترمون أو غير فهم، اذكرنا أنك تُحترم من يعْرفونا. اجعلنا نبقى مفتوحين لعفويتك دائمًا."
+    "whatHappened": "عاد يسوع إلى بلدته وعلّم في المجمع. فتعجّب الناس من حكمته ومعجزاته، لكنهم تساءلوا كيف نال هذه الحكمة والقدرة وهم يعرفونه ابن النجّار ويعرفون أمّه وأفراد عائلته. فرفضوه، وأوضح لهم يسوع أنّ النبي قد يلقى الإكرام في أماكن أخرى، لكنّه يُرفض في بلدته وبيته. ولم يصنع هناك معجزات كثيرة بسبب عدم إيمانهم.",
+    "jesusTeaches": "قد تمنعنا معرفتنا السابقة بالآخرين من رؤية حقيقتهم. عرف أهل البلدة عائلة يسوع، لكنهم لم يقبلوه بإيمان. يدعونا يسوع إلى التخلّي عن أحكامنا المسبقة والإصغاء إلى تعليمه بقلب منفتح. إنّ عدم إيمانهم منعهم من تقبّل ما قدّمه لهم، ولا يعني أنّ قدرة يسوع كانت محدودة.",
+    "liveToday": "أصغِ إلى كلام يسوع بإيمان، حتى عندما يدعوك إلى تغيير أفكارك. لا تستخفّ بأحد لمجرّد أنّك تعرف عائلته أو ظروفه. واطلب من الله أن يساعدك على رؤية عمله في تفاصيل حياتك اليومية.",
+    "prayer": "يا ربّ يسوع، ساعدنا على التعرّف إليك بإيمان وتواضع. حرّرنا من الأحكام المسبقة وافتح قلوبنا لحكمتك. علّمنا أن نقبل كلمتك حتى عندما تدعونا إلى التغيير. آمين."
   }
 }
