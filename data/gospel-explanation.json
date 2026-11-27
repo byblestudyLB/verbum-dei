@@ -1,18 +1,18 @@
 {
-  "date": "2026-11-26",
-  "gospelReference": "متّى 12 / 46 - 50",
-  "model": "Reviewed bilingual explanation",
-  "generatedAt": "2026-11-26T03:43:04Z",
+  "date": "2026-11-27",
+  "gospelReference": "يو 6 / 40 - 44",
+  "model": "Qwen3 4B · locally run",
+  "generatedAt": "2026-11-27T05:01:58.311Z",
   "english": {
-    "whatHappened": "While Jesus was speaking to the crowds, his mother and brothers stood outside, wanting to speak with him. When someone told him, Jesus asked who his mother and brothers were. Pointing toward his disciples, he said that whoever does the will of his Father in heaven is his brother, sister and mother.",
-    "jesusTeaches": "Jesus teaches that belonging to his spiritual family is not limited to blood relationships. Anyone who does the will of his heavenly Father can share this closeness with him. He is not asking us to reject our earthly families, but showing us the importance of living according to God's will.",
-    "liveToday": "Listen to Jesus and put his teaching into practice. Seek God's will in your decisions, treat others with kindness, and welcome fellow believers as members of one family.",
-    "prayer": "Lord Jesus, help us listen to your word and do the will of our heavenly Father. Teach us to love our families and welcome others with kindness. May our lives reflect our closeness to you. Amen."
+    "whatHappened": "Jesus says that those who see him and believe in him will have eternal life, and he will raise them up at the end of time. The Jews react by questioning how he can claim to have come down from heaven when they know his parents.",
+    "jesusTeaches": "Jesus explains that people can only come to him if the Father draws them, and he promises to raise them up at the end of time.",
+    "liveToday": "When you meet someone who seems different, ask gently how they feel and listen without judgment. Trust that God is working in your life to bring you closer to others.",
+    "prayer": "Lord, help me see others as you do. Show me how to listen with kindness and trust that you are guiding me toward you."
   },
   "arabic": {
-    "whatHappened": "بينما كان يسوع يكلّم الجموع، وقفت أمّه وإخوته في الخارج يريدون أن يكلّموه. وعندما أخبره أحد بذلك، سأل يسوع مَن هي أمّه ومَن هم إخوته. ثم أشار إلى تلاميذه وقال إنّ كلّ مَن يعمل بمشيئة أبيه السماوي هو أخوه وأخته وأمّه.",
-    "jesusTeaches": "يعلّمنا يسوع أنّ الانتماء إلى عائلته الروحية لا يقتصر على روابط القرابة. فكلّ مَن يعمل بمشيئة الآب السماوي يستطيع أن يكون قريبًا منه. لا يدعونا يسوع إلى رفض عائلاتنا، بل يبيّن لنا أهمية العيش بحسب مشيئة الله.",
-    "liveToday": "أصغِ إلى يسوع واعمل بتعاليمه. ابحث عن مشيئة الله في قراراتك، وعامل الآخرين بمحبة، واستقبل إخوتك في الإيمان كأفراد عائلة واحدة.",
-    "prayer": "يا ربّ يسوع، ساعدنا على الإصغاء إلى كلمتك والعمل بمشيئة أبينا السماوي. علّمنا أن نحبّ عائلاتنا ونستقبل الآخرين بمحبة. ولتكن حياتنا علامة على قربنا منك. آمين."
+    "whatHappened": "يقول يسوع: من يراها ويؤمن بها، سيعيشوا إلى الأبد، وسَيُنَبَّتُونَ في يوم النهاية. يُسَلِّمُ اليهود سؤالًا: كيف يُعَلِّقُ أنَّه أتى من السماء، بينما يَعْرِفُونَ أنَّ والديه يُعَلِّقُونَهُ؟",
+    "jesusTeaches": "يُعَلِّلُ يسوع أنَّ الناس يَجِبُونَ أن يَعْرِفُوا بِالْأَبِ، وَيُعَلِّلُ أنَّه سَيُنَبَّتُونَ في يوم النهاية.",
+    "liveToday": "عندما تَلْقَى شخصًا يَظْهَرُ مُختلفًا، اسْأَلْ بِلُطفٍ كيف يَعْرِفُ، وَلْتَعْرِفْ بِلا حِكْمَةٍ. اعْتَبِرْ أنَّ الله يَعْمَلُ في حَيَاتِكَ لِيُقَرِّبَكَ لِلْأَحْدَادِ.",
+    "prayer": "اللَّهُمَّ اسْتَعْمِلْ لِأَنْ أَرَى الآخَرَ كَما تَرَى. اشْرَحْ لِأَنْ أَسْمَعَ بِلُطفٍ وَأَعْرِفْ أَنَّكَ تَدْعُو لِيَجْمَعَكَ."
   }
 }
