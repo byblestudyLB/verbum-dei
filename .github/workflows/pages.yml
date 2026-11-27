@@ -325,6 +325,16 @@ jobs:
         with:
           artifact_name: pages-${{ github.run_id }}-${{ github.run_attempt }}
       
+      - name: Verify live Google ownership tag
+        run: |
+          for attempt in 1 2 3 4 5 6 7 8; do
+            if curl -fsSL --max-time 20 "https://byblestudylb.github.io/verbum-dei/?verify=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" -o /tmp/google-home.html && grep -Fq 'content="HhJ4I5dQ2gK743mlqKu-eGfDWDLpYFi2nFnoJ7lx3_0"' /tmp/google-home.html; then
+              exit 0
+            fi
+            sleep 15
+          done
+          exit 1
+
       - name: Verify live hymn page and homepage navigation
         run: |
           for attempt in 1 2 3 4 5 6 7 8; do
