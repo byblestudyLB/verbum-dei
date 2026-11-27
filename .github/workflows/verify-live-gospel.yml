@@ -1,0 +1,63 @@
+name: Verify live daily Gospel
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages", "Deploy GitHub Pages", "Deploy Verbum Dei"]
+    types: [completed]
+  schedule:
+    - cron: '15 6 * * *'
+      timezone: Asia/Beirut
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Compare published readings and explanation with fresh OLM
+        run: |
+          node --input-type=module <<'JS'
+          import dailyReadings from './netlify/functions/daily-readings.js';
+          const base = 'https://byblestudylb.github.io/verbum-dei/';
+          const date = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Beirut',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+          const assert = (ok,msg) => { if (!ok) throw new Error(msg); };
+          const norm = s => String(s ?? '').replace(/\s+/g,' ').trim();
+          async function live(path,json=true) {
+            const r = await fetch(base+path+'?verify='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(30000)});
+            assert(r.ok,path+' HTTP '+r.status);
+            return json ? r.json() : r.text();
+          }
+          for(let attempt=1;attempt<=6;attempt++){
+            try {
+              const response=await dailyReadings();
+              const source=await response.json();
+              assert(response.ok && source.date===date && !source.error,'OLM: '+JSON.stringify(source.error ?? source.date));
+              const [page,readings,explanation]=await Promise.all([live('',false),live('data/daily-readings.json'),live('data/gospel-explanation.json')]);
+              assert(page.trim().length>100,'Live page empty');
+              assert(readings.date===date && explanation.date===date,'Stale published date');
+              for(const type of ['epistle','gospel']){
+                for(const field of ['reference','arabic','english']){
+                  assert(norm(source[type]?.[field]) && norm(source[type][field])===norm(readings[type]?.[field]),type+'.'+field+' differs from fresh OLM-derived data');
+                }
+              }
+              assert(norm(explanation.gospelReference)===norm(source.gospel.reference),'Explanation reference mismatch');
+              for(const lang of ['english','arabic']) for(const field of ['whatHappened','jesusTeaches','liveToday','prayer']){
+                const value=explanation[lang]?.[field];
+                assert(typeof value==='string' && value.trim().length>=10,lang+'.'+field+' missing');
+                assert(lang==='arabic'? /\p{Script=Arabic}/u.test(value): /[a-z]/i.test(value),lang+'.'+field+' wrong language');
+                assert(!value.includes('\uFFFD'),lang+'.'+field+' invalid encoding');
+              }
+              console.log('PASS: '+date+' '+source.gospel.reference+'; live readings match fresh OLM-derived data and all eight explanation fields exist. Semantic accuracy and browser rendering require separate review.');
+              break;
+            } catch(e){
+              console.error('Attempt '+attempt+': '+e.message);
+              if(attempt===6) throw e;
+              await new Promise(r=>setTimeout(r,60000));
+            }
+          }
+          JS
