@@ -4,6 +4,8 @@ import dailyReadings from "../netlify/functions/daily-readings.js";
 
 const outputDir = path.resolve("_site/data");
 await fs.mkdir(outputDir, { recursive: true });
+// Preserve Google Search Console ownership verification in the published site.
+await fs.copyFile("googled9cadf9a3fffa8db.html", path.resolve("_site/googled9cadf9a3fffa8db.html"));
 
 const beirutDate = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Asia/Beirut",
